@@ -1,0 +1,43 @@
+*** Zoom for WooCommerce Appointments ***
+2021.04.27 - version 1.1.12
+* Fix: Initial status of appointment becomes confirmed rather than completed 
+* Feature: Updated to show Compatibility with WC 5.2.2
+
+2021.02.03 - version 1.1.11
+* Feature: Added meeting link to google calendar
+
+2020.12.18 - version 1.1.10
+* Feature: Added extra params and changed filter name to vczapi_woocommerce_appointments_create_meeting_params
+
+2020.11.23 - version 1.1.9
+* Fix: Meeting deleted after first cancellation - even when multiple people have meeting on same date.
+
+2020.10.20 - version 1.1.8
+* Fix: Error when meeting topic is longer than 200 chars
+
+2020.10.20 - version 1.1.7
+* Feature: Add debugging tools for Meeting not created error.
+
+2020.10.15 - version 1.1.6
+* Fix: Timezone correction when Customer Timezone is used
+
+2020.10.12 - version 1.1.5
+* Fix: Multiple meetings created when same date selected using WPML
+
+2020.08.14 - version 1.1.4
+* Fix / Feature: Add option to disable join via browser - add setting on backend
+
+2020.08.05 - version 1.1.3
+* Fix: Fatal error due to wrong function call
+
+2020.08.05 - version 1.1.2
+* Fix: Remove unused - activation function
+
+2020.08.04 - version 1.1.1
+* Add Join Links in e-mail
+
+2020.07.23 - version 1.1.0
+* Ability to Staff Host
+
+2020.07.13 - version 1.0.0
+* Initial Release

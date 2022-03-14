@@ -1,0 +1,1387 @@
+# Translation of Plugins - Video Conferencing with Zoom - Stable (latest release) in Spanish (Spain)
+# This file is distributed under the same license as the Plugins - Video Conferencing with Zoom - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-04-08 12:20:02+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: es\n"
+"Project-Id-Version: Plugins - Video Conferencing with Zoom - Stable (latest release)\n"
+
+#: includes/admin/class-zvc-admin-post-type.php:136
+msgid "Upcoming"
+msgstr "Próximos"
+
+#: includes/admin/class-zvc-admin-post-type.php:137
+msgid "Past"
+msgstr "Anteriores"
+
+#: includes/Elementor/Widgets/MeetingList.php:194
+#: includes/Elementor/Widgets/WebinarList.php:192
+msgid "Column Layout"
+msgstr "Diseño de columnas"
+
+#: includes/views/tabs/api-settings.php:108
+msgid "Show All"
+msgstr "Mostrar todos"
+
+#: includes/views/live/tpl-assign-host-id.php:38 build/index.js:1
+msgid "Save"
+msgstr "Guardar"
+
+#: templates/fragments/filters.php:14
+msgid "Showing all"
+msgstr "Mostrando todos"
+
+#: includes/views/live/tpl-assign-host-id.php:32
+msgid "Full Name"
+msgstr "Nombre completo"
+
+#: includes/views/live/tpl-assign-host-id.php:30
+msgid "ID"
+msgstr "ID"
+
+#: templates/fragments/filters.php:38
+msgid "Search.."
+msgstr "Buscar..."
+
+#: templates/fragments/countdown-timer.php:17
+msgid "PRO version is required for this meeting to be displayed."
+msgstr "Para visualizar esta reunión, es necesaria la versión PRO."
+
+#: includes/admin/class-zvc-admin-sync.php:93
+#: includes/admin/class-zvc-admin-sync.php:96
+msgid "No Meetings Found !"
+msgstr "¡No se han encontrado reuniones!"
+
+#: includes/Elementor/Widgets/WebinarList.php:119
+msgid "Webinars Order By"
+msgstr "Ordenar los webinars por"
+
+#: includes/views/sync.php:19
+msgid "Choose a Zoom User"
+msgstr "Elige un usuario de Zoom"
+
+#: templates/fragments/filters.php:34
+msgid "Sort Ascending"
+msgstr "Orden ascendente"
+
+#: templates/fragments/filters.php:32
+msgid "Default Sorting"
+msgstr "Orden por defecto"
+
+#: templates/content-meeting.php:42 templates/shortcode/zoom-listing.php:45
+msgid "Next Occurrence"
+msgstr "Próxima ocurrencia"
+
+#: includes/admin/class-zvc-admin-settings.php:63
+msgid "Extensions"
+msgstr "Extensiones"
+
+#: includes/admin/class-zvc-admin-settings.php:76
+msgid "Import"
+msgstr "Importar"
+
+#: templates/fragments/filters.php:21
+msgid "All Category"
+msgstr "Todas las categorías"
+
+#: includes/admin/class-zvc-admin-sync.php:45
+msgid "Sync Now"
+msgstr "Sincronizar ahora"
+
+#: includes/views/tabs/api-settings.php:199
+msgid "Facebook Group"
+msgstr "Grupo de Facebook"
+
+#: includes/admin/class-zvc-admin-sync.php:42
+msgid "Total Records Found"
+msgstr "Registros totales encontrados"
+
+#: templates/fragments/filters.php:33
+msgid "Sort Descending"
+msgstr "Orden descendente"
+
+#: templates/shortcode/zoom-recordings.php:25
+#: includes/views/live/tpl-list-recordings.php:24
+msgid "Recorded"
+msgstr "Grabado"
+
+#: templates/shortcode/zoom-recordings.php:26
+#: templates/shortcode/zoom-recordings-by-meeting.php:55
+#: includes/views/live/tpl-list-recordings.php:25
+msgid "Size"
+msgstr "Tamaño"
+
+#: templates/shortcode/zoom-recordings.php:27
+#: templates/shortcode/zoom-recordings-by-meeting.php:56
+#: includes/views/live/tpl-list-recordings.php:26
+msgid "Action"
+msgstr "Acción"
+
+#: templates/shortcode/zoom-recordings-by-meeting.php:28
+#: includes/Shortcodes/Recordings.php:52
+#: includes/views/live/tpl-list-recordings.php:51
+#: includes/views/live/tpl-list-recordings.php:52
+msgid "Play"
+msgstr "Reproducir"
+
+#: templates/shortcode/zoom-recordings-by-meeting.php:30
+#: includes/Shortcodes/Recordings.php:54 includes/Shortcodes/Recordings.php:55
+#: includes/views/live/tpl-list-recordings.php:54
+#: includes/views/live/tpl-list-recordings.php:55
+msgid "Download"
+msgstr "Descargar"
+
+#: includes/admin/class-zvc-admin-settings.php:58
+#: includes/views/live/tpl-list-recordings.php:10
+msgid "Recordings"
+msgstr "Grabaciones"
+
+#: includes/Shortcodes/Recordings.php:50
+#: includes/views/live/tpl-list-recordings.php:47
+msgid "File Type"
+msgstr "Tipo de archivo"
+
+#: includes/Shortcodes/Recordings.php:51
+#: includes/views/live/tpl-list-recordings.php:49
+msgid "File Size"
+msgstr "Tamaño del archivo"
+
+#: includes/helpers.php:707
+msgid "Next Results"
+msgstr "Resultados siguientes"
+
+#: includes/Shortcodes/Meetings.php:371 includes/Shortcodes/Webinars.php:156
+msgid "Join via App"
+msgstr "Únete a través de la aplicación"
+
+#: includes/Shortcodes/Webinars.php:59
+msgid "No webinar id set in the shortcode"
+msgstr "No se ha establecido el ID del webinar en el shortcode"
+
+#: includes/Shortcodes/Webinars.php:80
+msgid "Please try again ! Some error occured while trying to fetch webinar with id:  %d"
+msgstr "¡Por favor, inténtalo de nuevo! Ha ocurrido algún error al intentar buscar el webinar con ID: %d"
+
+#: includes/Elementor/Widgets/RecordingsByHost.php:95
+#: includes/Elementor/Widgets/MeetingHosts.php:95
+msgid "Select User"
+msgstr "Seleccionar el usuario"
+
+#: includes/Elementor/Widgets/RecordingsByHost.php:159
+#: includes/Elementor/Widgets/MeetingHosts.php:163
+msgid "No user selected."
+msgstr "No se ha seleccionado ningún usuario."
+
+#: includes/Elementor/Widgets/MeetingList.php:89
+#: includes/Elementor/Widgets/WebinarList.php:87
+msgid "Content"
+msgstr "Contenido"
+
+#: includes/Elementor/Widgets/MeetingByID.php:45
+#: includes/views/post-type/tpl-meeting-fields.php:67
+msgid "Zoom Meeting"
+msgstr "Reunión de Zoom"
+
+#: includes/Elementor/Widgets/MeetingByPostID.php:90
+#: includes/Elementor/Widgets/MeetingByID.php:92
+#: includes/admin/class-zvc-admin-post-type.php:228
+msgid "Meeting"
+msgstr "Reunión"
+
+#: includes/template-functions.php:184
+msgid "Webinar is not defined. Try updating this Webinar"
+msgstr "El webinar no está definido. Intenta actualizar este webinar"
+
+#: includes/admin/class-zvc-admin-webinars.php:157
+msgid "Created webinar %s at %s. Join %s"
+msgstr "Creado el webinar %s en %s. Únete %s"
+
+#: includes/views/webinars/tpl-list-webinars.php:11
+msgid "Webinars"
+msgstr "Webinars"
+
+#: includes/views/webinars/tpl-add-webinar.php:22
+#: includes/views/webinars/tpl-edit-webinar.php:22
+msgid "Back to selected host Webinars list"
+msgstr "Volver a la lista de webinars del anfitrión seleccionado"
+
+#: includes/views/webinars/tpl-add-webinar.php:32
+#: includes/views/webinars/tpl-edit-webinar.php:33
+msgid "Webinar topic. (Required)."
+msgstr "Tema del webinar. (Obligatorio)."
+
+#: includes/views/webinars/tpl-add-webinar.php:58
+#: includes/views/webinars/tpl-edit-webinar.php:54
+msgid "Starting Date and Time of the Webinar (Required)."
+msgstr "Fecha y hora de inicio del webinar (Obligatorio)."
+
+#: includes/views/webinars/tpl-add-webinar.php:77
+#: includes/views/webinars/tpl-edit-webinar.php:73
+msgid "Webinar duration (minutes). (optional)"
+msgstr "Duración del webinar (minutos). (Opcional)"
+
+#: includes/views/tabs/api-settings.php:144
+msgid "DateTime Format"
+msgstr "Formato de fecha y hora"
+
+#: templates/archive-meetings.php:55 templates/shortcode-listing.php:42
+msgid "No Meetings found."
+msgstr "No se han encontrado reuniones."
+
+#: templates/shortcode/zoom-webinar.php:82 includes/template-functions.php:382
+msgid "This is a meeting with no Fixed Time."
+msgstr "Esta es una reunión sin hora fija."
+
+#: templates/shortcode/zoom-webinar.php:55
+#: templates/shortcode/zoom-webinar.php:64
+#: templates/shortcode/zoom-webinar.php:74 includes/template-functions.php:355
+#: includes/template-functions.php:364 includes/template-functions.php:374
+msgid "Meeting has ended !"
+msgstr "¡La reunión ha terminado!"
+
+#: templates/shortcode/zoom-webinar.php:41 includes/template-functions.php:341
+msgid "Next Start Time"
+msgstr "Siguiente hora de inicio"
+
+#: templates/shortcode/zoom-recordings-by-meeting.php:53
+#: includes/admin/class-zvc-admin-post-type.php:193
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#: includes/views/live/tpl-list-meetings.php:118
+#: includes/views/webinars/tpl-list-webinars.php:117
+msgid "This is a recurring meeting with no fixed time."
+msgstr "Esta es una reunión periódica sin hora fija."
+
+#: templates/shortcode/zoom-webinar.php:37 includes/template-functions.php:337
+msgid "Ocurrences"
+msgstr "Ocurrencias"
+
+#: includes/admin/class-zvc-admin-post-type.php:235
+#: includes/admin/class-zvc-admin-post-type.php:246
+#: includes/admin/class-zvc-admin-post-type.php:255
+#: includes/admin/class-zvc-admin-post-type.php:271
+msgid "Meeting not created yet."
+msgstr "Reunión aún no creada."
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/video-conferencing-with-zoom-api/"
+msgstr "https://es.wordpress.org/plugins/video-conferencing-with-zoom-api/"
+
+#: includes/views/post-type/tpl-meeting-fields.php:59
+#: includes/views/post-type/tpl-meeting-fields.php:119
+#: includes/views/post-type/tpl-meeting-fields.php:328
+msgid "Did not find any hosts here ? Please %scheck here%s to verify your API keys are working correctly."
+msgstr "¿No has encontrado ningún anfitrión aquí? Por favor, %scomprueba aquí%s para verificar que tus claves de la API están funcionando correctamente."
+
+#: includes/template-functions.php:240
+msgid "Meeting is not defined. Try updating this meeting"
+msgstr "La reunión no está definida. Intenta actualizar esta reunión"
+
+#: templates/content-meeting.php:56 templates/shortcode/zoom-listing.php:59
+#: templates/shortcode/zoom-webinar.php:33
+#: includes/Elementor/Widgets/MeetingHosts.php:108
+#: includes/admin/class-zvc-admin-post-type.php:191
+#: includes/template-functions.php:333 includes/template-functions.php:388
+msgid "Type"
+msgstr "Tipo"
+
+#: includes/Shortcodes.php:127 includes/Shortcodes/Meetings.php:60
+#: includes/Shortcodes/Meetings.php:114 includes/Shortcodes/Webinars.php:59
+msgid "ERROR: "
+msgstr "ERROR: "
+
+#: includes/Shortcodes.php:187
+msgid "Download from Zoom"
+msgstr "Descargar desde Zoom"
+
+#: includes/admin/class-zvc-admin-post-type.php:438
+msgid "Join Meeting"
+msgstr "Únete a la reunión"
+
+#: includes/admin/class-zvc-admin-post-type.php:268
+msgid "Resuming this will enable users to join this meeting."
+msgstr "Reanudar esto permitirá a los usuarios unirse a esta reunión."
+
+#: includes/views/live/tpl-reports.php:23
+msgid "Pro, Business, Enterprise, Education, or API Account. Check more"
+msgstr "Cuenta Pro, Business, Enterprise, Education o API. Ver más"
+
+#: includes/views/live/tpl-reports.php:26
+msgid "Account owner or admin permissions to access Usage Reports for all users."
+msgstr "Permisos del propietario de la cuenta o del administrador para acceder a los informes de uso para todos los usuarios."
+
+#: includes/views/live/tpl-reports.php:27
+msgid "Account Owner or a user is given the User activities reports."
+msgstr "El propietario de la cuenta o un usuario recibe los informes de actividades del usuario."
+
+#: includes/views/post-type/tpl-meeting-fields.php:303
+#: includes/views/live/tpl-edit-meeting.php:148
+#: includes/views/webinars/tpl-add-webinar.php:116
+#: includes/views/webinars/tpl-edit-webinar.php:113
+msgid "Local"
+msgstr "Local"
+
+#: includes/views/post-type/tpl-meeting-fields.php:306
+#: includes/views/live/tpl-edit-meeting.php:151
+#: includes/views/webinars/tpl-add-webinar.php:117
+#: includes/views/webinars/tpl-edit-webinar.php:114
+msgid "Cloud"
+msgstr "Nube"
+
+#: includes/views/live/tpl-add-user.php:32
+msgid "User will get an email sent from Zoom. There is a confirmation link in this email. User will then need to click this link to activate their account to the Zoom service. The user can set or change their password in Zoom."
+msgstr "El usuario recibirá un correo electrónico enviado desde Zoom. Hay un enlace de confirmación en este correo electrónico. El usuario tendrá que hacer clic en este enlace para activar su cuenta en el servicio de Zoom. El usuario puede establecer o cambiar su contraseña en Zoom."
+
+#: includes/views/post-type/tpl-meeting-fields.php:192
+msgid "Password"
+msgstr "Contraseña"
+
+#: includes/views/live/tpl-add-user.php:13
+msgid "website"
+msgstr "web"
+
+#: includes/views/live/tpl-add-user.php:12
+msgid "What does this do ? Check out"
+msgstr "¿Qué hace esto? Echa un vistazo."
+
+#: includes/views/live/tpl-add-user.php:36
+msgid "This action is provided for enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain without notifying the user."
+msgstr "Esta acción se proporciona a clientes empresariales que tengan un dominio administrado. Esta función está desactivada por defecto debido al riesgo de seguridad que supone crear un usuario que no pertenece a tu dominio sin avisar al usuario."
+
+#: includes/views/live/tpl-add-user.php:40
+msgid "This action is provided for API partner only. User created in this way has no password and is not able to log into the Zoom web site or client."
+msgstr "Esta acción se proporciona solo al socio de la API. El usuario creado de esta manera no tiene contraseña y no puede acceder al sitio web o al cliente de Zoom."
+
+#: includes/views/live/tpl-add-user.php:44
+msgid "This action is provided for enabled “Pre-provisioning SSO User” option. User created in this way has no password. If it is not a basic user, will generate a Personal Vanity URL using user name (no domain) of the provisioning email. If user name or pmi is invalid or occupied, will use random number/random personal vanity URL."
+msgstr "Esta acción se proporciona para la opción activada «Pre-provisioning SSO User». El usuario creado de esta manera no tiene contraseña. Si no es un usuario básico, generará una URL de Vanity personal usando el nombre de usuario (sin dominio) del correo electrónico de aprovisionamiento. Si el nombre de usuario o PMI no es válido o está ocupado, utilizará un número aleatorio o una URL de Vanity personal aleatoria."
+
+#: includes/Bootstrap.php:220 includes/template-functions.php:95
+msgid "Are you sure you want to end this meeting ? Users won't be able to join this meeting shown from the shortcode."
+msgstr "¿Estás seguro de que quieres terminar esta reunión? Los usuarios no podrán unirse a esta reunión que se muestra desde el shortcode."
+
+#: includes/template-functions.php:102
+msgid "End Meeting ?"
+msgstr "¿Finalizar la reunión?"
+
+#: includes/template-functions.php:104
+msgid "Enable Meeting Join ?"
+msgstr "¿Activar unirse a la reunión?"
+
+#: includes/template-functions.php:106
+msgid "You are seeing this because you are the author of this post."
+msgstr "Estás viendo esto porque eres el autor de esta entrada."
+
+#: templates/shortcode/zoom-webinar.php:34
+#: includes/admin/class-zvc-admin-post-type.php:244
+#: includes/template-functions.php:334
+#: includes/views/live/tpl-list-meetings.php:120
+msgid "Recurring Meeting"
+msgstr "Reunión periódica"
+
+#: includes/Bootstrap.php:112 includes/Shortcodes/Meetings.php:137
+msgid "Meeting Has Started ! Click below join button to join meeting now !"
+msgstr "¡La reunión ha comenzado! ¡Haz clic en el siguiente botón para unirte a la reunión ahora!"
+
+#: includes/Bootstrap.php:113 includes/Shortcodes/Meetings.php:138
+msgid "Click join button below to join the meeting now !"
+msgstr "¡Haz clic en el siguiente botón para unirte a la reunión ahora!"
+
+#: includes/Bootstrap.php:114 includes/Shortcodes/Meetings.php:139
+msgid "This meeting has been ended by the host."
+msgstr "Esta reunión ha sido finalizada por el anfitrión."
+
+#: includes/Shortcodes.php:127 includes/Shortcodes/Meetings.php:60
+msgid "No meeting id set in the shortcode"
+msgstr "No se ha establecido el ID de la reunión en el shortcode."
+
+#: includes/Shortcodes.php:133
+msgid "Restricted access, please login to continue."
+msgstr "Acceso restringido, por favor, identifícate para continuar."
+
+#: includes/Shortcodes.php:177
+msgid "Note: If you are having trouble joining the meeting below, enter Meeting ID: "
+msgstr "Nota: Si tiene problemas para unirse a la siguiente reunión, introduce el ID de la reunión: "
+
+#: includes/Shortcodes.php:177
+msgid "and join via Zoom App."
+msgstr "y unirte a través de la aplicación Zoom."
+
+#: includes/Shortcodes.php:184
+msgid "Download App from Store"
+msgstr "Descargar la aplicación desde la tienda"
+
+#: templates/join-web-browser.php:21 includes/Shortcodes.php:196
+#: includes/Shortcodes/Meetings.php:67
+msgid "This meeting has been ended by host."
+msgstr "Esta reunión ha sido finalizada por el anfitrión."
+
+#: templates/join-web-browser.php:39
+msgid "!!!ALERT!!!: "
+msgstr "!ALERTA!: "
+
+#: templates/join-web-browser.php:39
+msgid "Browser did not detect a valid SSL certificate. Audio and Video for Zoom meeting will not work on a non HTTPS site, please install a valid SSL certificate to allow audio and video in your Meetings via browser."
+msgstr "El navegador no ha detectado un certificado SSL válido. El audio y el vídeo para la reunión de Zoom no funcionarán en un sitio que no sea HTTPS, por favor, instala un certificado SSL válido para permitir el audio y el vídeo en tus reuniones a través del navegador."
+
+#: includes/admin/class-zvc-admin-settings.php:106
+msgid "Zoom Integration Settings"
+msgstr "Ajustes de integración de Zoom"
+
+#: includes/admin/class-zvc-admin-post-type.php:195
+#: includes/views/live/tpl-list-meetings.php:63
+msgid "Meeting State"
+msgstr "Estado de la reunión"
+
+#: includes/admin/class-zvc-admin-post-type.php:264
+#: includes/views/live/tpl-list-meetings.php:128
+msgid "Disable Join"
+msgstr "Desactivar unirse"
+
+#: includes/admin/class-zvc-admin-post-type.php:265
+msgid "Restrict users to join this meeting before the start time or after the meeting is completed."
+msgstr "Restringir a los usuarios unirse a esta reunión antes de la hora de inicio o después de que la reunión haya terminado."
+
+#: includes/admin/class-zvc-admin-post-type.php:267
+#: includes/views/live/tpl-list-meetings.php:134
+msgid "Enable Join"
+msgstr "Activar unirse"
+
+#: includes/admin/class-zvc-admin-post-type.php:371
+msgid "Debug Log"
+msgstr "Registro de depuración"
+
+#: includes/admin/class-zvc-admin-post-type.php:476
+msgid "Enable Debug?"
+msgstr "¿Activar la depuración?"
+
+#: includes/admin/class-zvc-admin-post-type.php:439
+#: includes/views/live/tpl-list-meetings.php:85
+#: includes/views/webinars/tpl-list-webinars.php:84
+msgid "Start via Browser"
+msgstr "Iniciar a través del navegador"
+
+#: includes/views/live/tpl-list-meetings.php:89
+#: includes/views/webinars/tpl-list-webinars.php:88
+msgid "Start via App"
+msgstr "Iniciar a través de la aplicación"
+
+#: includes/views/live/tpl-list-meetings.php:131
+msgid "Ending this will disable users to join this meeting. Applies to any shortcode output only."
+msgstr "Terminar esto desactivará que los usuarios puedan unirse a esta reunión. Se aplica solo a cualquier salida del shortcode."
+
+#: includes/views/live/tpl-list-meetings.php:137
+msgid "Resuming this will enable users to join this meeting. Applies to any shortcode output only."
+msgstr "Reanudar esto permitirá a los usuarios unirse a esta reunión. Se aplica solo a cualquier salida del shortcode."
+
+#: includes/admin/class-zvc-admin-settings.php:115
+msgid "Support"
+msgstr "Soporte"
+
+#: includes/views/live/tpl-reports.php:20
+msgid "ATTENTION: Zoom Account & Setting Prerequisites for Reports Section"
+msgstr "ATENCIÓN: Cuenta de Zoom y ajuste de los requisitos previos para la sección de informes"
+
+#: includes/views/post-type/tpl-meeting-fields.php:300
+#: includes/views/live/tpl-edit-meeting.php:145
+#: includes/views/webinars/tpl-add-webinar.php:115
+#: includes/views/webinars/tpl-edit-webinar.php:111
+msgid "No Recordings"
+msgstr "No hay grabaciones"
+
+#: includes/views/tabs/shortcode.php:13
+msgid "Using Shortcode Example"
+msgstr "Ejemplo de uso del shortcode"
+
+#: includes/views/tabs/shortcode.php:14
+msgid "Below are few examples of how you can add shortcodes manually into your posts."
+msgstr "A continuación hay algunos ejemplos sobre cómo puedes añadir manualmente shortcodes en tus entradas."
+
+#: includes/views/tabs/shortcode.php:17
+msgid "Basic Usage"
+msgstr "Uso básico"
+
+#: includes/views/tabs/shortcode.php:21
+msgid "Listing Zoom Meetings"
+msgstr "Listado de reuniones de Zoom"
+
+#: includes/views/tabs/api-settings.php:36
+msgid ""
+"Read more about Vanity\n"
+"                                URLs"
+msgstr ""
+"Lee más sobre las URL\n"
+"                                Vanity"
+
+#: includes/views/tabs/api-settings.php:76
+msgid "Show Zoom Author ?"
+msgstr "¿Mostrar el autor de Zoom?"
+
+#: includes/views/tabs/api-settings.php:79
+msgid "Checking this show Zoom original Author in single meetings page which are created from"
+msgstr "Marcando esto, se muestra el autor original de Zoom en la página de reuniones individuales que se crean desde"
+
+#: includes/views/tabs/api-settings.php:126
+msgid "Meeting Started Text"
+msgstr "Texto para la reunión iniciada"
+
+#: includes/views/tabs/api-settings.php:132
+msgid "Meeting going to start Text"
+msgstr "Texto para el próximo comienzo de la reunión"
+
+#: includes/views/tabs/api-settings.php:138
+msgid "Meeting Ended Text"
+msgstr "Texto para la reunión finalizada"
+
+#: includes/views/post-type/tpl-meeting-fields.php:330
+#: includes/views/live/tpl-edit-meeting.php:173
+#: includes/views/webinars/tpl-edit-webinar.php:139
+msgid "Paid Zoom Account is required for this !! Alternative hosts IDs. Multiple value separated by comma."
+msgstr "¡Para esto se necesita una cuenta de pago de Zoom! IDs alternativos de los anfitriones. Múltiples valores separados por coma."
+
+#: templates/content-meeting.php:71 templates/shortcode/zoom-listing.php:76
+msgid "See More"
+msgstr "Ver más"
+
+#: templates/content-meeting.php:31 templates/shortcode/zoom-listing.php:33
+msgid "Hosted By:"
+msgstr "Presentado por:"
+
+#: templates/fragments/meeting-details.php:70
+msgid "%sNote%s: Countdown time is shown based on your local timezone."
+msgstr "%sNota%s: La cuenta atrás del tiempo se muestra en base a tu zona horaria local."
+
+#: templates/fragments/meeting-details.php:41 build/index.js:1
+msgid "Category"
+msgstr "Categoría"
+
+#: includes/admin/class-zvc-admin-post-type.php:459
+msgid "This will disable join via browser link in frontend page."
+msgstr "Esto desactivará unirse a través del enlace del navegador en la portada."
+
+#: includes/admin/class-zvc-admin-post-type.php:456
+msgid "Hide Join via browser link ?"
+msgstr "¿Ocultar «Unirse» a través del enlace del navegador?"
+
+#: includes/Elementor/Widgets/EmbedMeetings.php:107
+#: includes/admin/class-zvc-admin-post-type.php:452
+msgid "Requires Login?"
+msgstr "¿Es necesario acceder?"
+
+#: includes/views/live/tpl-list-meetings.php:78
+#: includes/views/webinars/tpl-list-webinars.php:77
+msgid "Click to Copy Shortcode !"
+msgstr "¡Haz clic para copiar el shortcode!"
+
+#: includes/views/post-type/tpl-meeting-fields.php:34
+msgid "If you need to show this meeting on another page or post please use this shortcode"
+msgstr "Si necesitas mostrar esta reunión en otra página o entrada, por favor, usa este shortcode"
+
+#: includes/admin/class-zvc-admin-post-type.php:376
+msgid "WooCommerce Integration?"
+msgstr "¿Integración con WooCommerce?"
+
+#: includes/admin/class-zvc-admin-settings.php:112
+#: includes/views/live/tpl-list-meetings.php:59
+#: includes/views/webinars/tpl-list-webinars.php:58
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: includes/views/tabs/api-settings.php:35
+msgid "If you are using Zoom Vanity URL then please insert it here else leave it empty."
+msgstr "Si estás usando la URL de Zoom Vanity, por favor, insértala aquí o déjala vacía."
+
+#: includes/admin/class-zvc-admin-post-type.php:367
+msgid "Meeting Details"
+msgstr "Detalles de la reunión"
+
+#: includes/Shortcodes/Meetings.php:337 includes/template-functions.php:314
+msgid "Meeting Status"
+msgstr "Estado de la reunión"
+
+#: includes/template-functions.php:325
+msgid "Refresh is needed to change status."
+msgstr "Es necesario actualizar para cambiar el estado."
+
+#: includes/views/tabs/api-settings.php:209
+msgid "Addons"
+msgstr "Extensiones"
+
+#: includes/views/tabs/api-settings.php:72
+msgid "This will show join meeting links on frontend even after meeting time is already past."
+msgstr "Esto mostrará los enlaces para unirse a la reunión en la portada, incluso después de que ya haya pasado la hora de la reunión."
+
+#: templates/fragments/countdown-timer.php:30 includes/Shortcodes.php:204
+msgid "days"
+msgstr "días"
+
+#: templates/fragments/countdown-timer.php:36 includes/Shortcodes.php:210
+msgid "hours"
+msgstr "horas"
+
+#: templates/fragments/countdown-timer.php:42 includes/Shortcodes.php:216
+msgid "minutes"
+msgstr "minutos"
+
+#: templates/fragments/countdown-timer.php:48 includes/Shortcodes.php:222
+msgid "seconds"
+msgstr "segundos"
+
+#: includes/views/post-type/tpl-meeting-fields.php:238
+#: includes/views/live/tpl-edit-meeting.php:123
+#: includes/views/live/tpl-add-meetings.php:105
+msgid "Participants Video"
+msgstr "Vídeo de participantes"
+
+#: includes/admin/class-zvc-admin-post-type.php:363
+msgid "Zoom Details"
+msgstr "Detalles de Zoom"
+
+#: includes/admin/class-zvc-admin-post-type.php:323
+msgid "View meetings"
+msgstr "Ver las reuniones"
+
+#: includes/admin/class-zvc-admin-post-type.php:322
+msgid "Edit meeting"
+msgstr "Editar la reunión"
+
+#: includes/admin/class-zvc-admin-post-type.php:320
+msgid "Add New meeting"
+msgstr "Añadir una nueva reunión"
+
+#: includes/admin/class-zvc-admin-post-type.php:319
+msgid "Add New"
+msgstr "Añadir nueva"
+
+#: templates/content-meeting.php:63 templates/shortcode/zoom-listing.php:66
+#: templates/fragments/meeting-details.php:35
+msgid "Start"
+msgstr "Iniciar"
+
+#: templates/fragments/meeting-details.php:30
+msgid "Hosted By"
+msgstr "Organizada por"
+
+#: templates/join-web-browser.php:114
+msgid "You do not have enough priviledge to access this page. Please login to continue or contact administrator."
+msgstr "No tienes suficientes privilegios para acceder a esta página. Por favor, accede para continuar o contacta con el administrador."
+
+#: includes/helpers.php:355
+msgid "Do not get confused here !!"
+msgstr "¡No te confundas aquí!"
+
+#: includes/helpers.php:358
+msgid "I understand ! Don't show this again !"
+msgstr "¡Entiendo! ¡No vuelvas a mostrar esto!"
+
+#: includes/views/tabs/api-settings.php:12
+msgid "this guide"
+msgstr "esta guía"
+
+#: includes/views/tabs/api-settings.php:192
+msgid "Check API Connection"
+msgstr "Comprobar la conexión de la API"
+
+#: templates/shortcode/join-links.php:20 templates/shortcode/join-links.php:29
+#: templates/shortcode/webinar-join-links.php:20
+#: templates/shortcode/webinar-join-links.php:29
+#: templates/join-web-browser.php:103
+msgid "Join"
+msgstr "Únete"
+
+#: includes/admin/class-zvc-admin-post-type.php:321
+msgid "New meeting"
+msgstr "Nueva reunión"
+
+#: includes/admin/class-zvc-admin-post-type.php:324
+msgid "All Meetings"
+msgstr "Todas las reuniones"
+
+#: includes/admin/class-zvc-admin-post-type.php:327
+msgid "No meetings found."
+msgstr "No se han encontrado reuniones."
+
+#: templates/fragments/meeting-details.php:20
+msgid "Details"
+msgstr "Detalles"
+
+#: templates/shortcode/join-links.php:18
+#: templates/shortcode/webinar-join-links.php:18 includes/Shortcodes.php:181
+msgid "Join via Zoom App"
+msgstr "Únete a través de la aplicación Zoom"
+
+#: includes/admin/class-zvc-admin-settings.php:43
+msgid "Zoom Users"
+msgstr "Usuarios Zoom"
+
+#: includes/admin/class-zvc-admin-post-type.php:316
+#: includes/admin/class-zvc-admin-post-type.php:317
+#: includes/admin/class-zvc-admin-post-type.php:318
+msgctxt "Zoom Meeting"
+msgid "Zoom Meeting"
+msgstr "Reunión Zoom"
+
+#: includes/views/live/tpl-add-meetings.php:22
+msgid "Back to selected host Meetings list"
+msgstr "Volver a la lista de reuniones del anfitrión seleccionado"
+
+#: templates/shortcode/join-links.php:27
+#: templates/shortcode/webinar-join-links.php:27 includes/helpers.php:594
+#: includes/helpers.php:598 includes/helpers.php:622 includes/helpers.php:626
+msgid "Join via Web Browser"
+msgstr "Únete a través del navegador web"
+
+#: includes/admin/class-zvc-admin-settings.php:33
+msgid "Live Meetings"
+msgstr "Reuniones en vivo"
+
+#: includes/admin/class-zvc-admin-post-type.php:325
+msgid "Search meetings"
+msgstr "Buscar reuniones"
+
+#: includes/admin/class-zvc-admin-post-type.php:455
+msgid "Only logged in users of this site will be able to join this meeting."
+msgstr "Solo los usuarios conectados de este sitio podrán unirse a esta reunión."
+
+#: includes/template-functions.php:155
+msgid "Join Meeting via Zoom App"
+msgstr "Unirse a la reunión a través de la aplicación Zoom"
+
+#: includes/views/tabs/api-settings.php:12
+msgid "to generate the below API values from your Zoom account"
+msgstr "para generar los siguientes valores de la API desde tu cuenta de ZOOM"
+
+#: includes/admin/class-zvc-admin-post-type.php:328
+msgid "No meetings found in Trash."
+msgstr "No se han encontrado reuniones en la papelera."
+
+#: includes/Timezone.php:49
+msgid "This meeting is no longer valid and cannot be joined !"
+msgstr "¡Esta reunión ya no es válida y no puedes unirte!"
+
+#: includes/views/tabs/api-settings.php:189
+msgid "After you enter your keys. Do save changes before doing \"Check API Connection\"."
+msgstr "Después de introducir tus claves, guarda los cambios antes de «Comprobar la conexión de la API»."
+
+#: includes/views/tabs/api-settings.php:11
+msgid "Please follow"
+msgstr "Por favor, continúa"
+
+#: includes/admin/class-zvc-admin-settings.php:38
+msgid "Add Live Meeting"
+msgstr "Añadir una reunión en vivo"
+
+#: includes/helpers.php:357
+msgid "Please read !!! These below meetings are directly from your zoom.us account via API connection. Meetings added from here won't show up on your Post Type list. This will only create meeting in your zoom.us account !"
+msgstr "¡Por favor, lee! Las siguientes reuniones son directamente desde tu cuenta zoom.us a través de la conexión de la API. Las reuniones añadidas desde aquí no aparecerán en tu lista de tipos de contenido. ¡Esto solo creará una reunión en tu cuenta de zoom.us!"
+
+#: includes/Shortcodes/Meetings.php:88
+msgid "Please try again ! Some error occured while trying to fetch meeting with id:  %d"
+msgstr "¡Por favor, inténtalo de nuevo! Ha ocurrido algún error al intentar recuperar la reunión con ID: %d"
+
+#: includes/views/tabs/api-settings.php:223
+msgid "Try inactive logout"
+msgstr "Intentar desconectar a los inactivos"
+
+#: includes/views/tabs/api-settings.php:32
+msgid "Vanity URL"
+msgstr "URL de Vanity"
+
+#: includes/admin/class-zvc-admin-users.php:66
+msgid "Created a User. Please check email for confirmation. Added user will only appear in the list after approval."
+msgstr "Creado un usuario. Por favor, comprueba el correo electrónico para la confirmación. El usuario añadido solo aparecerá en la lista después de la aprobación."
+
+#: includes/helpers.php:337
+msgid "check %s for shortcode references."
+msgstr "comprueba los %s para las referencias del shortcode."
+
+#: includes/views/post-type/tpl-meeting-fields.php:296
+#: includes/views/live/tpl-edit-meeting.php:141
+#: includes/views/live/tpl-add-meetings.php:123
+#: includes/views/webinars/tpl-add-webinar.php:112
+#: includes/views/webinars/tpl-edit-webinar.php:108
+msgid "Auto Recording"
+msgstr "Grabación automática"
+
+#: includes/views/post-type/tpl-meeting-fields.php:251
+#: includes/views/live/tpl-edit-meeting.php:136
+#: includes/views/live/tpl-add-meetings.php:118
+msgid "Mutes Participants when entering the meeting."
+msgstr "Silencia a los participantes al entrar en la reunión."
+
+#: includes/views/post-type/tpl-meeting-fields.php:309
+#: includes/views/live/tpl-edit-meeting.php:154
+#: includes/views/live/tpl-add-meetings.php:130
+#: includes/views/webinars/tpl-add-webinar.php:119
+#: includes/views/webinars/tpl-edit-webinar.php:116
+msgid "Set what type of auto recording feature you want to add. Default is none."
+msgstr "Establece qué tipo de característica de grabación automática quieres añadir. Por defecto es: ninguno."
+
+#: includes/views/post-type/tpl-meeting-fields.php:247
+#: includes/views/live/tpl-edit-meeting.php:132
+#: includes/views/live/tpl-add-meetings.php:114
+msgid "Mute Participants upon entry"
+msgstr "Silenciar a los participantes al entrar"
+
+#: includes/views/tabs/api-settings.php:191
+msgid "Save Changes"
+msgstr "Guardar los cambios"
+
+#: includes/views/live/tpl-list-users.php:36
+msgid "Last Client"
+msgstr "Último cliente"
+
+#: includes/views/live/tpl-add-user.php:27
+#: includes/views/live/tpl-add-user.php:44
+msgid "SSO Create"
+msgstr "Crear SSO"
+
+#: includes/views/live/tpl-add-user.php:25
+#: includes/views/live/tpl-add-user.php:36
+msgid "Auto Create"
+msgstr "Crear automáticamente"
+
+#: includes/views/live/tpl-add-user.php:24
+#: includes/views/live/tpl-add-user.php:32
+msgid "Create"
+msgstr "Crear"
+
+#: includes/views/live/tpl-edit-meeting.php:50
+#: includes/views/live/tpl-add-meetings.php:39
+msgid "Meeting Description."
+msgstr "Descripción de la reunión."
+
+#: includes/views/live/tpl-edit-meeting.php:47
+#: includes/views/live/tpl-add-meetings.php:36
+msgid "Meeting Agenda"
+msgstr "Agenda de la reunión"
+
+#: includes/admin/class-zvc-admin-meetings.php:92
+msgid "Updated meeting."
+msgstr "Reunión actualizada."
+
+#: includes/views/tabs/api-settings.php:20
+msgid "API Key"
+msgstr "Clave de la API"
+
+#: includes/views/live/tpl-add-meetings.php:143
+#: includes/views/webinars/tpl-add-webinar.php:132
+msgid "Alternative hosts IDs. Multiple value separated by comma."
+msgstr "IDs alternativos de anfitriones. Múltiples valores separados por coma."
+
+#: includes/admin/class-zvc-admin-users.php:90
+msgid "Saved !"
+msgstr "¡Guardado!"
+
+#: includes/views/post-type/tpl-meeting-fields.php:317
+#: includes/views/live/tpl-edit-meeting.php:159
+#: includes/views/live/tpl-add-meetings.php:135
+#: includes/views/webinars/tpl-add-webinar.php:124
+#: includes/views/webinars/tpl-edit-webinar.php:121
+msgid "Alternative Hosts"
+msgstr "Anfitriones alternativos"
+
+#: includes/views/live/tpl-add-user.php:26
+#: includes/views/live/tpl-add-user.php:40
+msgid "Cust Create"
+msgstr "Creado por el cliente"
+
+#: includes/views/live/tpl-list-users.php:35
+msgid "Last Login"
+msgstr "Último acceso"
+
+#: includes/views/live/tpl-add-user.php:21
+msgid "Action (Required)."
+msgstr "Acción (Obligatoria)."
+
+#: includes/views/post-type/tpl-meeting-fields.php:195
+#: includes/views/live/tpl-edit-meeting.php:102
+#: includes/views/live/tpl-add-meetings.php:84
+#: includes/views/webinars/tpl-add-webinar.php:84
+#: includes/views/webinars/tpl-edit-webinar.php:80
+msgid "Password to join the meeting. Password may only contain the following characters: [a-z A-Z 0-9]. Max of 10 characters.( Leave blank for auto generate )"
+msgstr "Contraseña para unirse a la reunión. La contraseña solo puede contener los siguientes caracteres: [a-z A-Z 0-9]. Máximo 10 caracteres. (Déjalo en blanco para generarla automáticamente)"
+
+#: includes/helpers.php:336
+msgid "Please consider giving a %s if you found this useful at wordpress.org or "
+msgstr "Por favor, considera dar %s en wordpress.org si lo encuentras útil o "
+
+#: includes/helpers.php:333
+msgid "Like this plugin ?"
+msgstr "¿Te gusta este plugin?"
+
+#. Author of the plugin
+msgid "Deepen Bajracharya"
+msgstr "Deepen Bajracharya"
+
+#: includes/admin/class-zvc-admin-ajax.php:54
+msgid "An error occured. Host ID and Meeting ID not defined properly."
+msgstr "Ha ocurrido un error. El ID del anfitrión y el ID de la reunión no están definidos correctamente."
+
+#: includes/admin/class-zvc-admin-ajax.php:87
+msgid "Deleted %d Meeting(s)."
+msgstr "Borrada(s) %d reunión(es)."
+
+#: includes/views/live/tpl-add-user.php:30
+#: includes/views/live/tpl-add-user.php:74
+msgid "Type of User (Required)"
+msgstr "Tipo de usuario (Obligatorio)"
+
+#: includes/views/live/tpl-add-user.php:51
+msgid "This address is used for zoom (Required)."
+msgstr "Esta dirección es usada por Zoom (Obligatorio)."
+
+#: includes/views/live/tpl-add-user.php:62
+msgid "Last Name"
+msgstr "Apellidos"
+
+#: includes/views/live/tpl-add-user.php:64
+msgid "Last Name of the User (Required)."
+msgstr "Apellidos del usuario (Obligatorio)."
+
+#: includes/views/live/tpl-add-user.php:68
+msgid "User Type (Required)."
+msgstr "Tipo usuario (Obligatorio)."
+
+#: includes/views/tabs/api-settings.php:205
+msgid "Contact for additional Support"
+msgstr "Contacta para obtener soporte adicional"
+
+#: includes/views/live/tpl-list-users.php:14
+msgid "Flush User Cache"
+msgstr "Vaciar la caché del usuario"
+
+#: templates/content-meeting.php:68 templates/shortcode/zoom-listing.php:71
+#: templates/shortcode/zoom-webinar.php:93 includes/Shortcodes/Meetings.php:339
+#: includes/Shortcodes/Webinars.php:141 includes/template-functions.php:401
+#: includes/views/post-type/tpl-meeting-fields.php:149
+#: includes/views/live/tpl-edit-meeting.php:80
+#: includes/views/live/tpl-add-meetings.php:62
+#: includes/views/webinars/tpl-add-webinar.php:62
+#: includes/views/webinars/tpl-edit-webinar.php:58
+msgid "Timezone"
+msgstr "Zona horaria"
+
+#: includes/views/live/tpl-edit-meeting.php:40
+#: includes/views/live/tpl-add-meetings.php:29
+msgid "Meeting Topic *"
+msgstr "Tema de la reunión *"
+
+#: includes/views/live/tpl-edit-meeting.php:43
+#: includes/views/live/tpl-add-meetings.php:32
+msgid "Meeting topic. (Required)."
+msgstr "Tema de la reunión. (Obligatorio)."
+
+#: includes/views/post-type/tpl-meeting-fields.php:110
+#: includes/views/post-type/tpl-meeting-fields.php:322
+#: includes/views/live/tpl-edit-meeting.php:57
+#: includes/views/live/tpl-edit-meeting.php:162
+#: includes/views/live/tpl-add-meetings.php:46
+#: includes/views/live/tpl-add-meetings.php:138
+#: includes/views/webinars/tpl-add-webinar.php:46
+#: includes/views/webinars/tpl-add-webinar.php:127
+#: includes/views/webinars/tpl-edit-webinar.php:124
+msgid "Select a Host"
+msgstr "Seleccionar un anfitrión"
+
+#: includes/views/post-type/tpl-meeting-fields.php:61
+#: includes/views/post-type/tpl-meeting-fields.php:93
+#: includes/views/post-type/tpl-meeting-fields.php:117
+#: includes/views/live/tpl-edit-meeting.php:62
+#: includes/views/live/tpl-add-meetings.php:51
+#: includes/views/webinars/tpl-add-webinar.php:51
+msgid "This is host ID for the meeting (Required)."
+msgstr "Este es el ID del anfitrión para la reunión (Obligatorio)."
+
+#: includes/views/post-type/tpl-meeting-fields.php:142
+#: includes/views/live/tpl-edit-meeting.php:76
+#: includes/views/live/tpl-add-meetings.php:58
+msgid "Starting Date and Time of the Meeting (Required)."
+msgstr "Fecha y hora de inicio de la reunión (Obligatorio)."
+
+#: includes/views/live/tpl-edit-meeting.php:95
+#: includes/views/live/tpl-add-meetings.php:77
+msgid "Meeting duration (minutes). (optional)"
+msgstr "Duración de la reunión (minutos). (Opcional)"
+
+#: includes/Elementor/Widgets/EmbedMeetings.php:175
+#: includes/Elementor/Widgets/EmbedMeetings.php:177
+#: includes/views/live/tpl-edit-meeting.php:99
+#: includes/views/live/tpl-add-meetings.php:81
+msgid "Meeting Password"
+msgstr "Contraseña de la reunión"
+
+#: includes/views/live/tpl-assign-host-id.php:33
+msgid "Host ID"
+msgstr "ID del anfitrión"
+
+#: includes/views/live/tpl-reports.php:120
+msgid "Print"
+msgstr "Imprimir"
+
+#: includes/views/live/tpl-add-user.php:58
+msgid "First Name of the User (Required)."
+msgstr "Nombre del usuario (Obligatorio)."
+
+#: includes/views/tabs/api-settings.php:207
+msgid "Developer"
+msgstr "Desarrollador"
+
+#: includes/views/live/tpl-list-users.php:13
+msgid "Users"
+msgstr "Usuarios"
+
+#: templates/shortcode/zoom-recordings.php:24
+#: templates/shortcode/zoom-webinar.php:98
+#: templates/fragments/meeting-details.php:49
+#: includes/template-functions.php:407
+#: includes/views/post-type/tpl-meeting-fields.php:171
+#: includes/views/live/tpl-list-recordings.php:23
+#: includes/views/live/tpl-edit-meeting.php:92
+#: includes/views/live/tpl-add-meetings.php:74
+#: includes/views/webinars/tpl-add-webinar.php:74
+#: includes/views/webinars/tpl-edit-webinar.php:70
+msgid "Duration"
+msgstr "Duración"
+
+#: templates/shortcode/zoom-recordings.php:22
+#: templates/shortcode/zoom-recordings-by-meeting.php:42
+#: templates/shortcode/zoom-webinar.php:21
+#: includes/Elementor/Widgets/EmbedMeetings.php:96
+#: includes/Elementor/Widgets/RecordingByMeetingID.php:95
+#: includes/admin/class-zvc-admin-post-type.php:194
+#: includes/admin/class-zvc-admin-post-type.php:440
+#: includes/template-functions.php:306
+#: includes/views/live/tpl-list-meetings.php:58
+#: includes/views/live/tpl-list-recordings.php:21
+msgid "Meeting ID"
+msgstr "ID de la reunión"
+
+#: templates/shortcode/zoom-recordings.php:23
+#: templates/shortcode/zoom-recordings-by-meeting.php:43
+#: templates/shortcode/zoom-webinar.php:25
+#: templates/fragments/meeting-details.php:27
+#: includes/Shortcodes/Meetings.php:336 includes/Shortcodes/Webinars.php:139
+#: includes/template-functions.php:310
+#: includes/views/live/tpl-list-meetings.php:60
+#: includes/views/live/tpl-list-recordings.php:22
+#: includes/views/webinars/tpl-list-webinars.php:59
+msgid "Topic"
+msgstr "Tema"
+
+#: includes/admin/class-zvc-admin-settings.php:53
+#: includes/views/live/tpl-reports.php:12
+msgid "Reports"
+msgstr "Informes"
+
+#: templates/archive-meetings.php:24
+#: includes/views/live/tpl-list-meetings.php:20
+#: includes/views/live/tpl-reports.php:58
+msgid "Meetings"
+msgstr "Reuniones"
+
+#: includes/views/live/tpl-list-meetings.php:61
+#: includes/views/webinars/tpl-list-webinars.php:60
+msgid "Status"
+msgstr "Estado"
+
+#: includes/views/live/tpl-list-meetings.php:88
+#: includes/views/webinars/tpl-list-webinars.php:87
+msgid "Trash"
+msgstr "Papelera"
+
+#: includes/views/live/tpl-reports.php:57
+msgid "Date"
+msgstr "Fecha"
+
+#: includes/views/live/tpl-reports.php:60
+msgid "Participants"
+msgstr "Participantes"
+
+#: includes/views/live/tpl-reports.php:122
+msgid "From"
+msgstr "De"
+
+#: includes/views/live/tpl-reports.php:131
+msgid "By"
+msgstr "Por"
+
+#: includes/views/live/tpl-add-user.php:49
+msgid "Email Address"
+msgstr "Dirección de correo electrónico"
+
+#: includes/views/live/tpl-add-user.php:55
+msgid "First Name"
+msgstr "Nombre"
+
+#: includes/views/live/tpl-add-user.php:72
+msgid "Pro User"
+msgstr "Usuario Pro"
+
+#: includes/views/live/tpl-list-users.php:30
+#: includes/views/live/tpl-list-pending-users.php:16
+msgid "SN"
+msgstr "SN"
+
+#: includes/views/live/tpl-list-users.php:32
+#: includes/views/live/tpl-assign-host-id.php:31
+#: includes/views/live/tpl-list-pending-users.php:18
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: includes/views/live/tpl-list-users.php:33
+msgid "Name"
+msgstr "Nombre"
+
+#: includes/views/tabs/api-settings.php:202
+msgid "Documentation"
+msgstr "Documentación"
+
+#: includes/views/live/tpl-edit-meeting.php:25
+msgid "Back to List"
+msgstr "Volver a la lista"
+
+#: includes/views/live/tpl-edit-meeting.php:24
+msgid "Edit a Meeting"
+msgstr "Editar una reunión"
+
+#: includes/views/live/tpl-add-user.php:71
+msgid "Basic User"
+msgstr "Usuario básico"
+
+#: includes/views/post-type/tpl-meeting-fields.php:222
+#: includes/views/live/tpl-edit-meeting.php:106
+#: includes/views/live/tpl-add-meetings.php:88
+msgid "Join Before Host"
+msgstr "Únete antes que el anfitrión"
+
+#: includes/views/post-type/tpl-meeting-fields.php:43
+#: includes/views/post-type/tpl-meeting-fields.php:78
+#: includes/views/post-type/tpl-meeting-fields.php:99
+#: includes/views/live/tpl-edit-meeting.php:54
+#: includes/views/live/tpl-add-meetings.php:43
+msgid "Meeting Host *"
+msgstr "Anfitrión de la reunión *"
+
+#: includes/admin/class-zvc-admin-reports.php:96
+msgid "The fields cannot be Empty !!"
+msgstr "¡Los campos no pueden estar vacíos!"
+
+#: includes/admin/class-zvc-admin-reports.php:67
+msgid "Date field cannot be Empty !!"
+msgstr "¡El campo de fecha no puede estar vacío!"
+
+#: includes/views/live/tpl-reports.php:132
+msgid "Meetings Held"
+msgstr "Reuniones celebradas"
+
+#: includes/views/live/tpl-reports.php:124
+msgid "To"
+msgstr "Para"
+
+#: templates/content-meeting.php:49 templates/shortcode/zoom-listing.php:52
+#: templates/shortcode/zoom-webinar.php:73
+#: templates/shortcode/zoom-webinar.php:81
+#: templates/shortcode/zoom-webinar.php:88 includes/Shortcodes/Meetings.php:338
+#: includes/Shortcodes/Webinars.php:140 includes/template-functions.php:373
+#: includes/template-functions.php:381 includes/template-functions.php:395
+#: includes/views/live/tpl-list-meetings.php:62
+#: includes/views/webinars/tpl-list-webinars.php:61
+msgid "Start Time"
+msgstr "Hora de inicio"
+
+#: includes/views/live/tpl-list-meetings.php:38
+#: includes/views/webinars/tpl-list-webinars.php:26
+msgid "Move to Trash"
+msgstr "Mover a la papelera"
+
+#: includes/admin/class-zvc-admin-recordings.php:87
+#: includes/views/live/tpl-list-meetings.php:44 includes/views/sync.php:20
+#: includes/views/webinars/tpl-list-webinars.php:39
+msgid "Select a User"
+msgstr "Seleccionar un usuario"
+
+#: includes/admin/class-zvc-admin-settings.php:174
+msgid "Dismiss this notice."
+msgstr "Descartar este aviso."
+
+#: includes/views/live/tpl-reports.php:61
+msgid "Meeting Minutes"
+msgstr "Minutos de la reunión"
+
+#: includes/views/live/tpl-reports.php:59
+msgid "New Users"
+msgstr "Nuevos usuarios"
+
+#: includes/views/live/tpl-reports.php:15
+msgid "1. Daily Report"
+msgstr "1. Informe diario"
+
+#: includes/views/post-type/tpl-meeting-fields.php:241
+#: includes/views/live/tpl-edit-meeting.php:126
+#: includes/views/live/tpl-add-meetings.php:108
+msgid "Start video when participants join meeting."
+msgstr "Iniciar el vídeo cuando los participantes se unan a la reunión."
+
+#: includes/views/post-type/tpl-meeting-fields.php:233
+#: includes/views/live/tpl-edit-meeting.php:117
+#: includes/views/live/tpl-add-meetings.php:99
+#: includes/views/webinars/tpl-add-webinar.php:91
+#: includes/views/webinars/tpl-edit-webinar.php:87
+msgid "Start video when host join meeting."
+msgstr "Iniciar el vídeo cuando el anfitrión se une a la reunión."
+
+#: includes/views/post-type/tpl-meeting-fields.php:167
+#: includes/views/live/tpl-edit-meeting.php:88
+#: includes/views/live/tpl-add-meetings.php:70
+msgid "Meeting Timezone"
+msgstr "Zona horaria de la reunión"
+
+#: includes/views/post-type/tpl-meeting-fields.php:139
+#: includes/views/live/tpl-edit-meeting.php:66
+#: includes/views/live/tpl-add-meetings.php:55
+#: includes/views/webinars/tpl-add-webinar.php:55
+#: includes/views/webinars/tpl-edit-webinar.php:44
+msgid "Start Date/Time *"
+msgstr "Fecha/hora de inicio *"
+
+#: includes/views/tabs/api-settings.php:26
+msgid "API Secret Key"
+msgstr "Clave secreta de la API"
+
+#: includes/admin/class-zvc-admin-settings.php:109
+msgid "API Settings"
+msgstr "Ajustes de la API"
+
+#: includes/Bootstrap.php:282 includes/admin/class-zvc-admin-settings.php:82
+msgid "Settings"
+msgstr "Ajustes"
+
+#: includes/views/live/tpl-list-meetings.php:64
+#: includes/views/live/tpl-list-users.php:34
+#: includes/views/live/tpl-list-pending-users.php:19
+#: includes/views/webinars/tpl-list-webinars.php:62
+msgid "Created On"
+msgstr "Creado el"
+
+#: includes/views/live/tpl-reports.php:108
+msgid "Total Records Found: "
+msgstr "Registros totales encontrados:"
+
+#: includes/views/live/tpl-reports.php:16
+msgid "2. Account Report"
+msgstr "2. Informe de la cuenta"
+
+#: templates/fragments/join-links.php:27
+#: includes/admin/class-zvc-admin-post-type.php:192
+#: includes/admin/class-zvc-admin-post-type.php:437
+msgid "Start Meeting"
+msgstr "Iniciar la reunión"
+
+#: includes/views/live/tpl-reports.php:110
+msgid "Total Participants Involved: "
+msgstr "Participantes totales involucrados:"
+
+#: includes/admin/class-zvc-admin-settings.php:48
+msgid "Add Users"
+msgstr "Añadir usuarios"
+
+#: includes/admin/class-zvc-admin-settings.php:172
+msgid "Successfully Updated. Please refresh this page."
+msgstr "Actualizado correctamente. Por favor, actualiza esta página."
+
+#: includes/views/live/tpl-reports.php:107
+msgid "Searching From: "
+msgstr "Buscando desde: "
+
+#: includes/views/live/tpl-reports.php:135
+msgid "Last Login Time"
+msgstr "Última hora de acceso"
+
+#: includes/admin/class-zvc-admin-ajax.php:91
+msgid "You need to select a data in order to initiate this action."
+msgstr "Tienes que seleccionar un dato para iniciar esta acción."
+
+#: includes/views/live/tpl-reports.php:158
+msgid "Enter a value to Check..."
+msgstr "Introduce un valor para comprobar..."
+
+#: includes/views/live/tpl-reports.php:119
+msgid "Get account report for a specified period."
+msgstr "Obtén un informe de la cuenta para un período específico."
+
+#: includes/admin/class-zvc-admin-recordings.php:78
+#: includes/views/live/tpl-reports.php:50
+msgid "Enter the date to check:"
+msgstr "Introduce la fecha para comprobar:"
+
+#: includes/views/live/tpl-add-user.php:2
+msgid "Add a User"
+msgstr "Añadir un usuario"
+
+#: includes/views/live/tpl-add-meetings.php:11
+msgid "Add a Meeting"
+msgstr "Añadir una reunión"
+
+#: includes/views/live/tpl-list-meetings.php:36
+#: includes/views/webinars/tpl-list-webinars.php:24
+msgid "Select bulk action"
+msgstr "Seleccionar la acción por lotes"
+
+#: includes/admin/class-zvc-admin-users.php:28
+msgid "Flushed User Cache!"
+msgstr "¡Vaciada la caché del usuario!"
+
+#: includes/admin/class-zvc-admin-meetings.php:131
+msgid "Created meeting %s at %s. Join %s"
+msgstr "Creada la reunión %s en %s. Únete %s"
+
+#: includes/views/live/tpl-edit-meeting.php:114
+#: includes/views/live/tpl-add-meetings.php:96
+msgid "Host join start"
+msgstr "Iniciar al unirse el anfitrión"
+
+#: includes/Shortcodes/Meetings.php:340 includes/Shortcodes/Webinars.php:142
+msgid "Actions"
+msgstr "Acciones"
+
+#: includes/views/live/tpl-reports.php:80
+msgid "Select a Date to Check"
+msgstr "Selecciona una fecha para comprobar"
+
+#: includes/views/live/tpl-reports.php:143
+msgid "No Records Found.."
+msgstr "No se han encontrado grabaciones..."
+
+#: includes/views/post-type/tpl-meeting-fields.php:225
+#: includes/views/live/tpl-edit-meeting.php:109
+#: includes/views/live/tpl-add-meetings.php:91
+msgid "Join meeting before host start the meeting. Only for scheduled or recurring meetings."
+msgstr "Unirse a la reunión antes de que el anfitrión inicie la reunión. Solo para reuniones programadas o periódicas."
+
+#. Plugin Name of the plugin
+msgid "Video Conferencing with Zoom"
+msgstr "Video Conferencing with Zoom"
+
+#: includes/views/live/tpl-reports.php:134
+msgid "Total Meeting Minutes"
+msgstr "Minutos totales de la reunión"
+
+#: includes/views/live/tpl-reports.php:133
+msgid "Total Participants"
+msgstr "Participantes totales"
+
+#: includes/views/live/tpl-list-users.php:31
+#: includes/views/live/tpl-list-pending-users.php:17
+msgid "User ID"
+msgstr "ID de usuario"
+
+#. Author URI of the plugin
+msgid "https://www.deepenbajracharya.com.np"
+msgstr "https://www.deepenbajracharya.com.np"

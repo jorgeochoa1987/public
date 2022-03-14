@@ -1,0 +1,354 @@
+/** PAGINA USUARIO **/
+
+
+/** CAMBIOS PARA VERSION DE ESCRITORIO **/
+
+@media (min-width: 768px) {
+
+    .usuario{
+
+        margin: 40px;
+    }
+    .herramientas{
+        /*background-color: #2630A0;*/
+        background-color: #1b966d;
+        color: snow;
+        margin: 20px;
+        -webkit-border-radius: 15px;
+        border-radius: 15px;
+    }
+    .herramientas-titulo{
+        font-weight: bold;
+        font-size: 1.1rem;
+        padding-top: 2.5rem;
+        padding-left: 5rem;
+    }
+
+    .configuracion{
+        margin: 3rem;
+    }
+}
+
+.usuario{
+
+    margin: 10px;
+}
+.usuario h3{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.usuario .cuadro-info{
+    margin:0 0 25px;
+    overflow:hidden;
+    padding:20px;
+    background-color:#E4F5FF;
+    border:1px solid #afcde3;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.titulo-azul{
+    color: blue;
+    font-size: 20px;
+}
+
+.cuadro-info .negrita{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.lista-guion li{
+    list-style-type: none;
+}
+.lista-guion li:before{
+    content: "-";
+}
+
+.info-azul{
+    text-align: center;
+    margin:0 0 25px;
+    overflow:hidden;
+    padding:20px;
+    background-color:#2D9CEE;
+    border:1px solid #afcde3;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+}
+.texto-blanco{
+    color: whitesmoke;
+}
+
+.imagen{
+    display: inline;
+    
+    
+}
+
+.imagen img{
+    width: 20rem;
+    margin: 20px;
+    align-content: center;
+}
+.iconos{
+    padding:20px;
+    text-align:center;
+}
+
+.iconos img{
+    
+    width: 10rem;
+    margin: 20px;
+    align-content: center;
+}
+
+.texto-iconos{
+    font-size: 18px;
+    font-weight: bold;
+    color: #063485;
+}
+
+.herramientas{
+    background-color: #2630A0;
+    color: snow;
+    margin: 5px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+.herramientas p{
+    color: snow;
+}
+
+.img-iconos{
+    width: 3rem;
+}
+
+.herramientas-detalle{
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.herramientas-titulo{
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding-top: 2.5rem;
+    padding-left: 1rem;
+}
+
+
+/** MENU **/
+
+.vertical-menu {
+    background-color: #E4F5FF;
+    border-radius: 10px;
+  }
+  
+  .vertical-menu a {
+    background-color: #E4F5FF; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .vertical-menu a:hover {
+    background-color: #204A8C; /* Add a green color to the "active/current" link */
+    color: white;
+  }
+  
+  .vertical-menu a.active {
+    background-color: #204A8C; /* Add a green color to the "active/current" link */
+    color: white;
+  }
+
+  .vertical-menu p{
+      text-align: center;
+      vertical-align: middle;
+      color: #204A8C;
+
+  }
+  .menu-link.titulo{
+
+      padding: 1rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      
+  }
+  .menu-link{
+      border-bottom: 2px solid #1F5C9B;
+  }
+ 
+
+  /** PAGINA USUARIO-ACCESOS **/
+
+  .configuracion{
+      margin: 0.5rem;
+  }
+  .btn-volver{
+      
+      margin-bottom: 2rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-align: center;
+  }
+  .btn-volver i{
+      color: #2D9CEE;
+  }
+  .cuadro-linea-abajo{
+      padding: 2rem;
+      border-bottom: 3px solid #1F5C9B;
+  }
+
+  .cuadro-linea-abajo h5{
+     margin-bottom: 1rem;
+     font-weight: bold;
+     font-size: 1.2rem;
+  }
+
+  p.titulo{
+      font-weight: bold;
+      color: black;
+  }
+
+  p.subtitulo{
+    font-weight: bold;
+    
+  }
+
+.pie{
+    margin-top: 1.5rem;
+    line-height: 100%;
+  }
+
+.btn-rosa{
+      background-color: #FC6D72;
+      border-radius: 10px;
+      text-align: left;
+  }
+
+.btn-celeste{
+    background-color: #2D9CEE;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.btn-amarillo{
+    background-color: #E7A830;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.list-group-item i{
+    font-size: 1.4rem;
+}
+
+/** PAGINA PAGO **/
+
+.img-container{
+    background-color:lightgray;
+    text-align:center;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.tabla-container{
+    border-radius: 10px;
+    background-color:lightgray;
+}
+
+
+/** CHECKOUT **/
+
+.woocommerce-additional-fields .title{
+    font-weight: bold;
+    font-family: Nunito;
+    font-size: 18px;
+}
+
+.woocommerce-additional-fields__field-wrapper .woocommerce-input-wrapper input{
+    background: #fff;
+    border: 1px solid #eee;
+    height: 45px;
+    font-size: 15px;
+    padding: 1px 0 0 15px;
+}
+
+/** FORMULARIO DE NUEVO ALUMNO **/
+.titulo-alumno{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.titulo-carro-sbs{
+    color: blue;
+    font-size: 20px;
+    padding-bottom: 2%;
+    font-weight: bold;
+}
+
+.texto-sbs-carro2{
+    padding-bottom: 5%;
+    font-weight: bold;
+}
+
+.btn-add-estudiante{
+    font-family: "Nunito", sans-serif;
+    color:blue;
+    font-weight: bold;
+    font-size: 15px;
+}
+.icono-add-alumno{
+    font-size: 20px;
+}
+.btn-new-estudiante{
+    margin-bottom: 2rem;
+}
+
+.texto-rojo{
+    color: red;
+}
+
+/* MODAL de CONTACTO */
+
+h5.azul{
+    color: #2630A0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+button.especial{
+    background-color: #3745A9;
+    border-radius: 30px;
+}
+#modalSoporte{
+    border-radius: 30px;
+}
+i.suscripciones{
+    background-image: url('https://sbsdigital.cl/wp-content/themes/ecademy/assets/img/sbs/icono-plataformas-black.svg'); 
+}
+
+
+.cart_item td.product-total{
+    text-align: right;
+}
+.cart-subtotal td{
+    text-align: right;
+}
+.order-total td{
+    text-align: right;
+}
+.cart-discount td{
+    text-align: right;
+}
+
+
+/** LOGIN **/
+
+.login {
+    font-family: "Nunito", sans-serif;
+}
+
+.imagen-login{
+    margin-left: 100px;
+}

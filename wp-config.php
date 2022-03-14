@@ -17,7 +17,7 @@
  * @link https://wordpress.org/support/article/editing-wp-config-php/
  *
  * @package WordPress
- */
+ */ 
 define( 'WP_HOME', 'http://sbswebpage.local/' );
 define( 'WP_SITEURL', 'http://sbswebpage.local/' );
 // ** Database settings - You can get this info from your web host ** //

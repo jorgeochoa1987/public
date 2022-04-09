@@ -17,18 +17,17 @@
  * @link https://wordpress.org/support/article/editing-wp-config-php/
  *
  * @package WordPress
- */ 
-define( 'WP_HOME', 'http://sbswebpage.local/' );
-define( 'WP_SITEURL', 'http://sbswebpage.local/' );
+ */  
+
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'local' );
+define( 'DB_NAME', 'sbs' );
 
 /** Database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'wpsbs' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'root' );
+define( 'DB_PASSWORD', 'wpsbs' );
 
 /** Database hostname */
 define( 'DB_HOST', 'localhost' );

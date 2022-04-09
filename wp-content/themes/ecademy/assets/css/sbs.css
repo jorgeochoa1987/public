@@ -1,5 +1,63 @@
 /** PAGINA USUARIO **/
+.info-azul-bk{
+    background: #E9F7FF;
+}
 
+.buttonblue
+{
+    background: #33AEF2;
+    border-radius: 21px;
+    color: white;
+    padding: 2px 5px 2px 5px;
+}
+.clases-prod{
+    width: 80% !important;
+    object-fit: cover;
+}
+.cuadro-cursos-agenda {
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: white;
+}
+.info-azul-bk.imagen {
+    width: 100% !important;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 21px;
+}
+.info-white-bk.imagen {
+    width: 100% !important;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 21px;
+    background-color: white;
+}
+.mid-row {
+    width: 50%;
+    float: left;
+}
+.full-row {
+    width: 100%;
+    float: left;
+    text-align-last: center;
+}
+.info {
+    padding-bottom: 10px;
+}
+
+.white-box {
+    background: white;
+    border-radius: 22px;
+    padding: 10px;
+    margin-top: 18px;  
+}
+.clasesp{
+    line-height: 0.7;
+    font-size:15px !important;   
+}
+.calendario {
+    text-align-last: center;
+}
 
 /** CAMBIOS PARA VERSION DE ESCRITORIO **/
 

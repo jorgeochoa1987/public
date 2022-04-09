@@ -40,16 +40,62 @@
         <hr>
         <div class="cuadro-cursos">
             <h4 class="titulo-azul">Tus Suscripciones</h4>
+        <?php
+       
+$user_id =get_current_user_id();
+        $args = array(
+            'customer_id' => $user_id
+        );
+        $orders = wc_get_orders($args);
         
-            <div class="imagen">
-                <a href="https://www.matific.com/cl/es-ar/login-page/" target="_blank">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/sbs/banner-matific.png" alt="">
+           foreach ( $orders as $orderchild ) {
+            // echo $ido = $orderchild->id.'<br>';
+        $order_data = $orderchild->get_data(); // The Order data
+        $order_id = $order_data['id'];
+        $order_currency = $order_data['currency'];
+        $order_status = $order_data['status'];    
+        // echo $order_data ;
+        // echo $order_id ;
+        // echo $order_currency ;
+        // echo $order_status; 
+
+        foreach ($orderchild->get_items() as $key => $lineItem) {
+            $product_id = $lineItem['product_id'];
+            $product = wc_get_product( $product_id );
+            $name = $lineItem->get_name(); 
+            $image = wp_get_attachment_image_src( get_post_thumbnail_id(  $product_id ), 'single-post-thumbnail' );
+if ($image[0]==''){$image[0]="http://localhost:8888/sbs/public/wp-content/uploads/2021/07/placeholder.png";}
+            
+            ?> 
+            
+
+         <div class="imagen">
+                <a href="<?php if($name=='Agenda y Aula Clases on line')
+                { echo 'http://localhost:8888/sbs/public/agenda/'; }
+                else { echo 'https://www.matific.com/cl/es-ar/login-page/';} 
+                ?>"target="_blank" >
+                <img src="<?php echo $image[0]; ?>" data-id="<?php echo $id; ?>" />
+
                 </a>
             </div>
+
+
+  <?php      }
+    } 
+     
+        ?>
+       
+           
         
             
         </div>
 
+
+       
+        <div class="info">
+    <a href="http://localhost:8888/sbs/public/shop/" target="_blank" >
+        <img src=" http://localhost:8888/sbs/public/wp-content/uploads/2022/04/ir-a-la-tienda.png" /> </a>
+        </div>
         <div class="info-azul">
             <p class="texto-blanco"><strong>Recuerda: </strong>Para iniciar sesión en la plataforma debes usar las credenciales (mail, contraseña) que enviamos a tu correo electrónico</p>
         </div>

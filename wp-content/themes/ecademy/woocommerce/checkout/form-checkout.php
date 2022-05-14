@@ -70,4 +70,8 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
     </form>
 </div>
+
+<div>
+<p class="form-row form-group form-row-wide validate-required" id="billing_email_field" data-priority=""><label for="billing_email" class="form-label">Reingrese Email&nbsp;<abbr class="required" title="obligatorio">*</abbr></label><span class="woocommerce-input-wrapper" data-ol-has-click-handler=""><input type="text" class="input-text form-control" name="billing_email" id="billing_email" placeholder="" value="luismg88@gmail.com" data-ol-has-click-handler=""></span></p>
+</div>
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

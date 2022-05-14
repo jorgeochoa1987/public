@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 * Handling all the AJAX calls in Login Customizer.
 *
 * @since 2.2.0
-* @version 2.2.0
+* @version 2.1.5
 
 * @class Deactivate_Login_Customizer
 */
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Deactivate_Login_Customizer' ) ) :
 	public static function init() {
 
 		$ajax_calls = array(
-			'deactivate'       => false,
+			// 'deactivate'       => false,
 		);
 
 		foreach ( $ajax_calls as $ajax_call => $no_priv ) {

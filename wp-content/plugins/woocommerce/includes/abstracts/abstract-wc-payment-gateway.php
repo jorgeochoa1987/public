@@ -2,7 +2,7 @@
 /**
  * Abstract payment gateway
  *
- * Hanldes generic payment gateway functionality which is extended by idividual payment gateways.
+ * Handles generic payment gateway functionality which is extended by individual payment gateways.
  *
  * @class WC_Payment_Gateway
  * @version 2.1.0
@@ -225,7 +225,7 @@ abstract class WC_Payment_Gateway extends WC_Settings_API {
 		if ( $order ) {
 			$return_url = $order->get_checkout_order_received_url();
 		} else {
-			$return_url = wc_get_endpoint_url( 'checkout/order-received', '', wc_get_checkout_url() );
+			$return_url = wc_get_endpoint_url( 'order-received', '', wc_get_checkout_url() );
 		}
 
 		return apply_filters( 'woocommerce_get_return_url', $return_url, $order );

@@ -18,7 +18,10 @@
         <a href="https://sbsdigital.cl/usuario-suscripciones/" <?php echo ($slug === 'usuario-suscripciones') ? 'class="active"':''; ?>> <i class="fa fa-calculator"></i> Tus suscripciones</a>
     </div>
     <div class="menu-link">
+        <a href="https://sbsdigital.cl/estudiantes/" <?php echo ($slug === 'usuario-pago') ? 'class="active"':''; ?>><i class="fa fa-credit-card"></i> Método de pago </a>
+    </div>
+    <div class="menu-link">
         <a href="https://sbsdigital.cl/usuario-pago/" <?php echo ($slug === 'usuario-pago') ? 'class="active"':''; ?>><i class="fa fa-credit-card"></i> Método de pago </a>
     </div>
-
+ 
 </div>

@@ -166,49 +166,96 @@ class Setup {
 		* [$free_fields array of free fields]
 		* @var array
 		*/
-		$delete_all =	array(
-			'name'  => 'logincust_delete_all',
-			'label' => __( 'Delete All Settings', 'login-customizer' ),
-			'desc'	=> __( 'Enable this option to delete every settings of this plugin on uninstall', 'login-customizer' ),
-
-			'type'  => 'checkbox'
+		$free_fields = array(
+			array(
+				'name'  => 'auto_remember_me',
+				'label' => __( 'Auto Remember Me', 'login-customizer' ),
+				'desc'  => __( 'Keep remember me option always checked on login page', 'login-customizer' ),
+				'type'  => 'checkbox',
+			),
+			array(
+				'name'    => 'login_order',
+				'label'   => __( 'Login Order', 'login-customizer' ),
+				'desc'    => __( 'Enable users to login using their username or email address.', 'login-customizer' ),
+				'type'    => 'radio',
+				'default' => 'default',
+				'options' => array(
+					'default'  => __( 'Both Username Or Email Address', 'login-customizer' ),
+					'username' => __( 'Only Username', 'login-customizer' ),
+					'email'    => __( 'Only Email Address', 'login-customizer' ),
+				),
+			),
+			array(
+				'name'  => 'logincust_delete_all',
+				'label' => __( 'Delete All Settings', 'login-customizer' ),
+				'desc'	=> __( 'Enable this option to delete every settings of this plugin on uninstall', 'login-customizer' ),
+				'type'  => 'checkbox',
+			),
 		);
 
-		$remember_field = array(
-			'name'  => 'auto_remember_me',
-			'label' => __( 'Auto Remember Me', 'login-customizer' ),
-			'desc'  => __( 'Keep remember me option always checked on login page', 'login-customizer' ),
-			'type'  => 'checkbox'
-		);
-		
-		$login_order = array(
-			'name'    => 'login_order',
-			'label'   => __( 'Login Order', 'login-customizer' ),
-			'desc'    => __( 'Enable users to login using their username or email address.', 'login-customizer' ),
-			'type'    => 'radio',
-			'default' => 'default',
-			'options' => array(
-			'default'  => __( 'Both Username Or Email Address', 'login-customizer' ),
-			'username' => __( 'Only Username', 'login-customizer' ),
-			'email'    => __( 'Only Email Address', 'login-customizer' )
-			)
-		);
+		if ( '0' !== get_option( 'users_can_register' ) ) {
+			$free_fields = $this->logincust_custom_register_field( $free_fields );
+		}
 
-		$register_pass_field = array(
-			'name'  => 'enable_reg_pass_field',
-			'label' => __( 'Custom Password Fields', 'login-customizer' ),
-			'desc'  => __( 'Enable custom password fields on registration form.', 'login-customizer' ),
-			'type'  => 'checkbox'
-		);
+		/**
+		 * Add option to remove language switcher option
+		 *
+		 * @since 2.1.7
+		 */
+		if ( version_compare( $GLOBALS['wp_version'], '5.9', '>=' ) && ! empty( get_available_languages() ) ) {
+			$free_fields = $this->logincust_language_switcher( $free_fields );
+		}
 
-		$free_fields = get_option( 'users_can_register' ) == '0' ? array( $remember_field, $login_order, $delete_all ) : array( $remember_field, $register_pass_field, $login_order, $delete_all );
-		
 		$_settings_fields = apply_filters( 'login_customizer_pro_settings', $free_fields );
 		$settings_fields  = array( 'logincust_setting' => $_settings_fields );
 		$tab              = apply_filters( 'login_customizer_settings_fields', $settings_fields );
 
 		return $tab;
 	}
+
+	/**
+	* logincust_language_switcher [merge a language switcher in the settings element of array.]
+	*
+	* @param  array $fields_list The free fields of Login customizer.
+	* @since 2.1.7
+	* @return array the total fields including the added field of language switcher
+	*/
+	public function logincust_language_switcher( $fields_list ) {
+
+		$array_elements   = array_slice( $fields_list, 0, -1 ); //slice a last element of array.
+		$last_element     = end( $fields_list ); // last element of array.
+		$switcher_option  = array(
+			'name'  => 'enable_language_switcher',
+			'label' => __( 'Language Switcher', 'login-customizer' ),
+			'desc'  => __( 'Remove Language Switcher Dropdown On Login Page. ', 'login-customizer' ),
+			'type'  => 'checkbox',
+		);
+
+		$lang_switch_element = array_merge( array( $switcher_option, $last_element ) );
+		return array_merge( $array_elements, $lang_switch_element );
+	}
+
+	/**
+	* logincust_custom_register_field [merge a custom password field in the settings element of array.]
+	*
+	* @param  array $fields_list The free fields of Login customizer.
+	* @since 2.1.7
+	* @return array the total fields including the added field of custom password field
+	*/
+	public function logincust_custom_register_field( $fields_list ) {
+
+		$array_elements   = array_slice( $fields_list, 0, -1 ); //slice a last element of array.
+		$last_element     = end( $fields_list ); // last element of array.
+		$register_field_option  = array(
+			'name'  => 'enable_reg_pass_field',
+			'label' => __( 'Custom Password Fields', 'login-customizer' ),
+			'desc'  => __( 'Enable custom password fields on registration form.', 'login-customizer' ),
+			'type'  => 'checkbox',
+		);
+		$lang_switch_element = array_merge( array( $register_field_option, $last_element ) );
+		return array_merge( $array_elements, $lang_switch_element );
+	}
+
 
 	/**
 	 * Create the plugin's settings page.

@@ -14,6 +14,19 @@ define('ECADEMY_IMG',ECADEMY_THEME_URI . '/assets/img');
 define('ECADEMY_CSS',ECADEMY_THEME_URI . '/assets/css');
 define('ECADEMY_JS',ECADEMY_THEME_URI . '/assets/js');
 if( !defined('ECADEMY_FRAMEWORK_VAR') ) define('ECADEMY_FRAMEWORK_VAR', 'ecademy_opt');
+ 
+	
+wp_register_script('jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js', false, null);
+wp_register_script('jquerymodal', '//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js', false, null);
+wp_register_style('jquerystyle', '//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css', false, null);
+wp_register_style('jqueryupdate', '//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js', false, null);
+
+
+wp_enqueue_script('jquery');
+wp_enqueue_script('jquerymodal');
+wp_enqueue_style('jquerystyle');
+add_action( 'jqueryupdate', 'loadmyjquery' );
+ 
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -86,7 +99,7 @@ add_action( 'after_setup_theme', 'ecademy_content_width', 0 );
 if ( ! function_exists( 'ecademy_scripts' ) ) :
 
 	function ecademy_scripts() {
-        global $ecademy_opt;
+        global $ecademy_opt; 
 		$is_cursor      = !empty($ecademy_opt['is_cursor']) ? $ecademy_opt['is_cursor'] : '';
 		if( isset( $ecademy_opt['enable_lazyloader'] ) ):
 			$is_lazyloader = $ecademy_opt['enable_lazyloader'];
@@ -445,3 +458,173 @@ function my_analitycs(){
 }
 
 add_action('wp_head','my_analitycs',20);
+
+
+add_shortcode('edit_account', 'display_myaccount_edit_account');
+function display_myaccount_edit_account()
+{
+    return WC_Shortcode_My_Account::edit_account();
+}
+
+
+
+function my_custom_my_account_menu_items( $items ) {
+    $items = array(
+        'dashboard'         => __( 'Dashboard', 'woocommerce' ),
+        'orders'            => __( 'Pagos', 'woocommerce' ),
+      //  'downloads'       => __( 'Downloads', 'woocommerce' ),
+     //   'edit-address'    => __( 'Addresses', 'woocommerce' ),
+        //'payment-methods' => __( 'Payment Methods', 'woocommerce' ),
+        '../usuario-editar/'      => __( 'Editar perfil', 'http://localhost:8888/sbs/public/usuario-editar/' ),
+       // 'refunds-returns'      => 'Refunds & Returns', 
+        'customer-logout'   => __( 'Salir', 'woocommerce' ), 
+    ); 
+  
+    return $items;
+}
+
+add_filter( 'woocommerce_account_menu_items', 'my_custom_my_account_menu_items' );
+
+/*Function de  registros*/
+/*Activo AJAX para custom login*/
+function loadmyjquery() {
+    wp_enqueue_script( 'js', get_theme_file_uri( '/assets/js/formularios.js'), array('jquery') );
+
+    wp_localize_script( 'js', 'ajax_var', array(
+        'url'    => admin_url( 'admin-ajax.php' ),
+        'nonce'  => wp_create_nonce( 'my-ajax-nonce' ),
+        'action' => 'event-list'
+    ) );
+}
+add_action( 'wp_footer', 'loadmyjquery' );
+
+
+
+function my_event_list_cb() {
+    // Check for nonce security
+    $nonce = sanitize_text_field( $_POST['nonce'] );
+$usuario =  sanitize_text_field( $_POST['user'] ); 
+$password= sanitize_text_field( $_POST['password'] );
+	
+ if ( ! wp_verify_nonce( $nonce, 'my-ajax-nonce' )) {
+        echo 'ok';
+ }
+		$userdata = get_user_by( 'login', $usuario );
+		$clue ="NExT@8y@=azqdBJ";
+		$passdb = $userdata->user_pass ;	
+		$varmd5 = md5($clue+$password) ;
+		$passmd5 =  md5($clue+$passdb);
+
+		if ($varmd5 === $passmd5 ){	
+			if ( $userdata ) {
+				wp_set_current_user( $userdata->ID, $userdata->data->user_login );
+				wp_set_auth_cookie( $userdata->ID );
+				echo 'ok';      wp_die();
+			} 
+			else{
+			$creds = array();
+			$creds['user_login'] = $usuario;
+			$creds['user_password'] = $password;
+			$creds['remember'] = true;
+			$user = wp_signon( $creds, false );
+			echo 'ok';wp_die(); }
+}	
+		
+		else{echo 'error....>'.$passdb.'pass....>'.$password;wp_die();}		
+    }
+add_action( 'wp_ajax_nopriv_event-list', 'my_event_list_cb' );
+add_action( 'wp_ajax_event-list', 'my_event_list_cb' );
+
+function my_event_update() {
+$user_id = $_POST["id"] ;
+ $name = $_POST["account_first_name"] ;
+ $last =  $_POST["account_last_name"] ;
+ $display = $_POST["account_display_name"] ;
+ $email=  $_POST["account_email"] ;
+
+ $user_data = wp_update_user( array( 'ID' => $user_id, 
+'user_email' => $email,
+'first_name' => $name,
+'last_name' => $last,
+'display_name'=> $display) );
+if ($user_data){
+	echo $user_data;
+}
+        wp_die();
+     
+}
+add_action( 'wp_ajax_nopriv_update_data', 'my_event_update' );
+add_action( 'wp_ajax_update_data', 'my_event_update' );
+
+
+function my_update_form3() {
+	$user_id = $_POST["id"] ;
+	$descripcion =$_POST["descripcion"];
+	$experiencia =$_POST["experiencia"];
+	$estudios =$_POST["estudios"];
+	$matific =$_POST["matific"];
+	$glifting =$_POST["glifting"];
+
+	$updated = update_user_meta( $user_id, 'experiencia', $experiencia);
+	$updated = update_user_meta( $user_id, 'descripcion', $descripcion);
+	$updated = update_user_meta( $user_id, 'estudios', $estudios);
+	$updated = update_user_meta( $user_id, 'matific', $matific);
+	$updated = update_user_meta( $user_id, 'glifting', $glifting);
+ 
+	if(!$updated ){
+		$add = add_user_meta( $user_id, 'experiencia', $experiencia);
+		$add = add_user_meta( $user_id, 'descripcion', $descripcion);
+		$add = add_user_meta( $user_id, 'estudios', $estudios);
+		$add = add_user_meta( $user_id, 'matific', $matific);
+		$add = add_user_meta( $user_id, 'glifting', $glifting);
+
+		echo  $add  ;  
+	 }else{
+		 echo $updated;
+	 }
+			wp_die();
+		 
+	}
+	add_action( 'wp_ajax_nopriv_update_form3', 'my_update_form3' );
+	add_action( 'wp_ajax_update_form3', 'my_update_form3' );
+
+
+	function my_update_form4() {
+		$user_id = $_POST["id"] ;
+		$field_especializa =$_POST["field_especializa"];
+		$field_idioma =$_POST["field_idioma"]; 
+		$field_nivel =$_POST["field_nivel"];
+		$matific =$_POST["matific"];
+		$glifting =$_POST["glifting"]; 
+	 echo $_SERVER['POST'];
+
+		
+				wp_die();
+			 
+		}
+		add_action( 'wp_ajax_nopriv_update_form4', 'my_update_form3' );
+		add_action( 'wp_ajax_update_form4', 'my_update_form3' );
+
+		
+function my_update_form5() {
+	$user_id = $_POST["id"] ;
+	$tarifa =$_POST["tarifa"];
+	$total = ($tarifa  + ($tarifa /100*20));
+
+	$updated = update_user_meta( $user_id, 'tarifa', $tarifa);
+	$updated = update_user_meta( $user_id, 'tarifapublico', $total);
+ if(!$updated ){
+	$add = add_user_meta( $user_id, 'tarifa', $tarifa);
+	$add = add_user_meta( $user_id, 'tarifapublico', $total);
+	echo  $add  ;  
+ }else{
+	 echo $updated;
+ }
+
+
+			wp_die();
+		 
+	}
+	add_action( 'wp_ajax_nopriv_update_form5', 'my_update_form5' );
+	add_action( 'wp_ajax_update_form5', 'my_update_form5' );
+

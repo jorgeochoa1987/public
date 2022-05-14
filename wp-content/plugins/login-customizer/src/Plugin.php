@@ -35,9 +35,8 @@ class Plugin {
 		 * Instance of Essentials Class for Defining Variables
 		 */
 		add_action( 'init', function() {
-			new Essentials; 
+			new Essentials;
 		}, 1 );
- 
 
 		// Customizer Settings Creation
 		$customizer_settings = new Create_Customizer;
@@ -52,25 +51,46 @@ class Plugin {
 		$plugin_meta = new Plugin_Meta;
 		$plugin_meta->hooks();
 
-
 		/**
 		 * Settings
 		 */
 		new Notification();
-		$logincust_setting 		= get_option( 'logincust_setting' );
-		$login_order 			= isset( $logincust_setting['login_order'] ) ? $logincust_setting['login_order'] : '';
-		$enable_reg_pass_field 	= isset( $logincust_setting['enable_reg_pass_field'] ) ?  $logincust_setting['enable_reg_pass_field'] : 'off';
+		$logincust_setting     = get_option( 'logincust_setting' );
+		$login_order           = isset( $logincust_setting['login_order'] ) ? $logincust_setting['login_order'] : '';
+		$enable_reg_pass_field = isset( $logincust_setting['enable_reg_pass_field'] ) ? $logincust_setting['enable_reg_pass_field'] : 'off';
 
-
-		//Custom Register Fields if option is enbled from Login Customizer and WordPress Settings 
+		/**
+		 * Custom Register Fields if option is enbled from Login Customizer and WordPress Settings.
+		 */
 		if ( 'off' != $enable_reg_pass_field && get_option( 'users_can_register' ) !== '0' ) {
 			new Custom_Register_Password;
+		}
+
+		 /**
+		 * Check if the language is downloaded and WordPress has 5.9 or higher version.
+		 *
+		 * @since 2.1.7
+		 */
+		if ( version_compare( $GLOBALS['wp_version'], '5.9', '>=' ) && ! empty( get_available_languages() ) ) {
+			$enable_lang_switcher 	= isset( $logincust_setting['enable_language_switcher'] ) ? $logincust_setting['enable_language_switcher'] : 'off';
+
+			/**
+			 * Filters the Languages select input activation on the login screen.
+			 *
+			 * @since 2.1.7
+			 * @param bool Whether to display the Languages select input on the login screen.
+			 */
+			if ( 'off' !== $enable_lang_switcher ) {
+				add_filter( 'login_display_language_dropdown', '__return_false' );
+			} else {
+				add_filter( 'login_display_language_dropdown', '__return_true' );
+			}
 		}
 
 		//Login Order
 		if ( 'default' != $login_order ) {
 			new Login_Order();
 		}
-		
+
 	}
 }

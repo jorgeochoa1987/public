@@ -72,7 +72,7 @@ add_action( 'wp_enqueue_scripts', 'pm_add_font_awesome' );
 add_action( 'woocommerce_before_checkout_billing_form', 'texto_inicial' );
 function texto_inicial() {
 	echo ('
-        <h4 class="titulo-carro-sbs">Completa el formulario de suscripción. Los primeros 30 días con la plataforma son gratis.</h4>
+        <h4 class="titulo-carro-sbs">Completa el formulario de suscripción.</h4>
         <h3 class="title-especial">¿Eres el apoderado? completa tu registro y el del estudiante</h3>
     ');
 }

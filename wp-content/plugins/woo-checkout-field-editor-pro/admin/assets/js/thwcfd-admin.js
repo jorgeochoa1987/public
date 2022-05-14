@@ -1,5 +1,126 @@
+( function ( wp, $ ) {
+	'use strict';
+
+	if ( ! wp ) {
+		return;
+	}
+
+	$( function () {
+		$( document ).on( 'click', '.th-plugin-action.install-now', function ( event ) {
+			const $button = $( event.target );
+
+			if ( $button.hasClass( 'activate-now' ) ) {
+				return true;
+			}
+
+			event.preventDefault();
+
+			if (
+				$button.hasClass( 'updating-message' ) ||
+				$button.hasClass( 'button-disabled' )
+			) {
+				return;
+			}
+
+			if (
+				wp.updates.shouldRequestFilesystemCredentials &&
+				! wp.updates.ajaxLocked
+			) {
+				wp.updates.requestFilesystemCredentials( event );
+
+				$( document ).on( 'credential-modal-cancel', function () {
+					const $message = $( '.install-now.updating-message' );
+
+					$message
+						.removeClass( 'updating-message' )
+						.text( wp.updates.l10n.installNow );
+
+					wp.a11y.speak( wp.updates.l10n.updateCancel, 'polite' );
+				} );
+			}
+
+			wp.updates.installPlugin( {
+				slug: $button.data( 'slug' ),
+			} );
+		} );
+	} );
+} )( window.wp, jQuery );
+
+
+
+var thwcfd_plugins_list = (function($, window, document) {
+	'use strict';
+
+	$( function () {
+		$( document ).on( 'click', '.th-plugin-action.activate-now', function ( event ) {
+
+			const $button = $( event.target );
+
+			event.preventDefault();
+
+			if (
+				$button.hasClass( 'updating-message' ) ||
+				$button.hasClass( 'button-disabled' )
+			) {
+				return;
+			}
+
+			var url_string = $button.attr('href');
+			var url = new URL(url_string);
+			var file = url.searchParams.get("plugin");
+			var nonce = url.searchParams.get("_wpnonce");
+			var action = url.searchParams.get("action");
+
+			if(action == 'activate'){
+				action = 'th_activate_plugin';
+			}
+
+			if(file == null || nonce == null || action == null){
+			     return;
+			}
+
+			var data = {
+				'action': action,
+				'file': file,
+				'_wpnonce': nonce,
+			};
+
+			jQuery.ajax({
+			    type: "post",
+			    dataType: "json",
+			    url: ajaxurl,
+			    data: data,
+			    beforeSend: function(){
+			        $button.addClass('updating-message');
+			        $button.text('Activating');
+			    },
+			    success: function(data){
+			    	$button.removeClass('updating-message');
+			    	if(data == true){
+			    		$button.text('Activated');
+			    		$button.addClass('disabled');
+			    	}else{
+			    		$button.text('Failed');
+			    		$button.addClass('disabled');
+			    	}
+			    },
+			    error: function(xhr){
+			    		$button.text('Failed');
+			    		$button.addClass('disabled');
+			    },
+			});
+		} );
+	} );
+
+}(window.jQuery, window, document));
 var thwcfd_base = (function($, window, document) {
 	'use strict';
+
+	var _wp$i18n = wp.i18n;
+	var __ = _wp$i18n.__;
+	var _x = _wp$i18n._x;
+	var _n = _wp$i18n._n;
+	var _nx = _wp$i18n._nx;
 
 	function escapeHTML(html) {
 	   var fn = function(tag) {
@@ -392,11 +513,16 @@ function thwcfdWizardNext(elm){
 function thwcfdWizardPrevious(elm){
 	thwcfd_base.form_wizard_previous(elm);
 }
-
 var thwcfd_settings_field = (function($, window, document) {
 	'use strict';
 
-	var MSG_INVALID_NAME = 'NAME/ID must begin with a lowercase letter ([a-z]) or underscores ("_") and may be followed by any number of lowercase letters, digits ([0-9]) and underscores ("_")';
+	var _wp$i18n = wp.i18n;
+	var __ = _wp$i18n.__;
+	var _x = _wp$i18n._x;
+	var _n = _wp$i18n._n;
+	var _nx = _wp$i18n._nx;	
+
+	var MSG_INVALID_NAME = __('NAME/ID must begin with a lowercase letter ([a-z]) or underscores ("_") and may be followed by any number of lowercase letters, digits ([0-9]) and underscores ("_")', 'woo-checkout-field-editor-pro');
 	var SPECIAL_FIELD_TYPES = ["country", "state", "city"];
 
 	var FIELD_FORM_PROPS = {
@@ -408,6 +534,10 @@ var thwcfd_settings_field = (function($, window, document) {
 		placeholder : {name : 'placeholder', type : 'text'},
 		class       : {name : 'class', type : 'text'},
 		validate    : {name : 'validate', type : 'select', multiple : 1 },
+		
+		title_type  : {name : 'title_type', type : 'select'},
+		
+		checked : {name : 'checked', type : 'checkbox'},
 
 		required : {name : 'required', type : 'checkbox'},
 		enabled  : {name : 'enabled', type : 'checkbox'},
@@ -419,6 +549,7 @@ var thwcfd_settings_field = (function($, window, document) {
 	var FIELDS_TO_HIDE = {
 		radio : ['placeholder', 'validate'],
 		select : ['validate'],
+		password: ['default'],
 	};	
 
 	function open_new_field_form(sname){
@@ -444,7 +575,7 @@ var thwcfd_settings_field = (function($, window, document) {
 	}
 
 	function populate_field_form(popup, form, action, elm, sname){
-		var title = action === 'edit' ? 'Edit Field' : 'New Field';
+		var title = action === 'edit' ? __('Edit Field', 'woo-checkout-field-editor-pro') : __('New Field', 'woo-checkout-field-editor-pro');
 		popup.find('.wizard-title').text(title);
 
 		form.find('.err_msgs').html('');
@@ -544,7 +675,7 @@ var thwcfd_settings_field = (function($, window, document) {
 			var type   = field['type'];
 			var value  = props && props[name] ? props[name] : '';
 
-			if(ftype == 'textarea' && name == 'value'){
+			if(ftype == 'textarea' && name == 'default'){
 				type = "textarea";
 			}
 
@@ -679,6 +810,9 @@ var thwcfd_settings_field = (function($, window, document) {
 		var ftype  = thwcfd_base.get_property_field_value(form, 'select', 'type');
 		var ftitle = thwcfd_base.get_property_field_value(form, 'text', 'label');
 		var fotype = thwcfd_base.get_property_field_value(form, 'hidden', 'otype');
+		var fvalue = thwcfd_base.get_property_field_value(form, 'text', 'default');
+		var option_values = form.find("input[name='i_options_key[]']").map(function(){ return $(this).val(); }).get();
+
 
 		if(ftype == '' && ($.inArray(fotype, SPECIAL_FIELD_TYPES) == -1) ){
 			err_msgs = 'Type is required';
@@ -690,11 +824,33 @@ var thwcfd_settings_field = (function($, window, document) {
 			err_msgs = MSG_INVALID_NAME;
 		}
 
+		if(fvalue && (option_values.length>0) && (ftype == 'select' || ftype == 'radio' || ftype == 'multiselect' || ftype == 'checkboxgroup')){
+			if(ftype == 'select' || ftype == 'radio'){
+				if(!(option_values.includes(fvalue))){
+					err_msgs = __('Enter default value given in the options.', 'woo-checkout-field-editor-pro');
+				}
+			}else if(ftype == 'multiselect' || ftype == 'checkboxgroup'){
+				var value_array = fvalue.split(', ');
+				for(var i = 0; i < value_array.length; i++){
+				    var value = value_array[i];
+					if(value && !(option_values.includes(value))){
+						err_msgs = __('Enter default values given in the options.', 'woo-checkout-field-editor-pro');
+					}
+				};
+			}
+		}
+
+		if(fvalue && ftype == 'number' && (/^-?\d+$/.test(fvalue) === false)){
+			err_msgs = __('Default value must be a number.', 'woo-checkout-field-editor-pro');
+		}
+
 		if(err_msgs != ''){
 			form.find('.err_msgs').html(err_msgs);
 			thwcfd_base.form_wizard_start(popup);
 			return false;
 		}
+
+		//return false;
 
 		return true;
 	}
@@ -765,11 +921,11 @@ var thwcfd_settings_field = (function($, window, document) {
 		}
 
 		var html  = '<tr>';
-	        html += '<td class="key"><input type="text" name="i_options_key[]" value="'+key+'" placeholder="Option Value"></td>';
-			html += '<td class="value"><input type="text" name="i_options_text[]" value="'+text+'" placeholder="Option Text"></td>';
+	        html += '<td class="key"><input type="text" name="i_options_key[]" value="'+key+'" placeholder="' + __('Option Value' , 'woo-checkout-field-editor-pro') + '"></td>';
+			html += '<td class="value"><input type="text" name="i_options_text[]" value="'+text+'" placeholder="' + __('Option Text', 'woo-checkout-field-editor-pro') + '"></td>';
 			html += '<td class="action-cell">';
-			html += '<a href="javascript:void(0)" onclick="thwcfdAddNewOptionRow(this)" class="btn btn-tiny btn-primary" title="Add new option">+</a>';
-			html += '<a href="javascript:void(0)" onclick="thwcfdRemoveOptionRow(this)" class="btn btn-tiny btn-danger" title="Remove option">x</a>';
+			html += '<a href="javascript:void(0)" onclick="thwcfdAddNewOptionRow(this)" class="btn btn-tiny btn-primary" title="'+ __('Add new option', 'woo-checkout-field-editor-pro') +'">+</a>';
+			html += '<a href="javascript:void(0)" onclick="thwcfdRemoveOptionRow(this)" class="btn btn-tiny btn-danger" title="'+ __('Remove option', 'woo-checkout-field-editor-pro') +'">x</a>';
 			html += '<span class="btn btn-tiny sort ui-sortable-handle"></span></td>';
 			html += '</tr>';
 
@@ -840,6 +996,12 @@ function thwcfdSaveField(elm){
 
 var thwcfd_settings = (function($, window, document) {
 	'use strict';
+
+	var _wp$i18n = wp.i18n;
+	var __ = _wp$i18n.__;
+	var _x = _wp$i18n._x;
+	var _n = _wp$i18n._n;
+	var _nx = _wp$i18n._nx;
 		
 	$(function() {
 		var settings_form = $('#thwcfd_checkout_fields_form');
@@ -849,25 +1011,12 @@ var thwcfd_settings = (function($, window, document) {
 		thwcfd_base.setup_form_wizard();
 	});
 
-
-	$( document ).on( 'click', '.thpladmin-notice .notice-dismiss', function() {
-		var wrapper = $(this).closest('div.thpladmin-notice');
-		var nonce = wrapper.data("nonce");
-		var action = wrapper.data("action");
-		var data = {
-			security: nonce,
-			action: action,
-		};
-		$.post( ajaxurl, data, function() {
-
-		});
-	})
-
-	$(document).ready(function(){
-	   setTimeout(function(){
-	      $("#thwcfd_review_request_notice").fadeIn(500);
-	   }, 2000);
-	});	
+	$(document).keypress(function(e) {
+		if ($("#thwcfd_field_form_pp").is(':visible') && (e.keycode == 13 || e.which == 13)) {
+			e.preventDefault();
+			thwcfdSaveField(this);
+		}
+	});
    
 	function select_all_fields(elm){
 		var checkAll = $(elm).prop('checked');
@@ -898,29 +1047,26 @@ var thwcfd_settings = (function($, window, document) {
 			}
 			
 			//row.find(".f_edit_btn").prop('disabled', enabled == 1 ? false : true);
-			row.find(".td_enabled").html(enabled == 1 ? '<span class="dashicons dashicons-yes tips" data-tip="Yes"></span>' : '-');
+			row.find(".td_enabled").html(enabled == 1 ? '<span class="dashicons dashicons-yes tips" data-tip="'+ __('Yes', 'woo-checkout-field-editor-pro') +'"></span>' : '-');
 			row.find(".f_enabled").val(enabled);
 	  	});	
 	}
 
-	function hide_review_request_notice(elm){
-		var wrapper = $(elm).closest('div.thpladmin-notice');
+	$( document ).on( 'click', '.thpladmin-notice .notice-dismiss', function() {
+		var wrapper = $(this).closest('div.thpladmin-notice');
 		var nonce = wrapper.data("nonce");
 		var data = {
-			security: nonce,
-			action: 'skip_thwcfd_review_request_notice',
+			thwepo_review_nonce: nonce,
+			action: 'hide_thwcfd_admin_notice',
 		};
 		$.post( ajaxurl, data, function() {
 
 		});
-		$(wrapper).hide(50);
-	}
-	   				
+	});   				
 	return {
 		selectAllFields : select_all_fields,
 		removeSelectedFields : remove_selected_fields,
 		enableDisableSelectedFields : enable_disable_selected_fields,
-		hideReviewRequestNotice : hide_review_request_notice,
    	};
 }(window.jQuery, window, document));	
 
@@ -938,8 +1084,4 @@ function thwcfdEnableSelectedFields(){
 
 function thwcfdDisableSelectedFields(){
 	thwcfd_settings.enableDisableSelectedFields(0);
-}
-
-function thwcfdHideReviewRequestNotice(elm){
-	thwcfd_settings.hideReviewRequestNotice(elm);
 }

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit82c9f43e6cfe7a01d4033ba16d363513
+class ComposerStaticInit4970ab0df62f13a7833385064991b918
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -14,6 +14,7 @@ class ComposerStaticInit82c9f43e6cfe7a01d4033ba16d363513
         'Leadin\\PageHooks' => __DIR__ . '/../..' . '/src/class-pagehooks.php',
         'Leadin\\admin\\AdminConstants' => __DIR__ . '/../..' . '/src/admin/class-adminconstants.php',
         'Leadin\\admin\\AdminFilters' => __DIR__ . '/../..' . '/src/admin/class-adminfilters.php',
+        'Leadin\\admin\\AdminUserMetaData' => __DIR__ . '/../..' . '/src/admin/class-adminusermetadata.php',
         'Leadin\\admin\\Connection' => __DIR__ . '/../..' . '/src/admin/class-connection.php',
         'Leadin\\admin\\DeactivationForm' => __DIR__ . '/../..' . '/src/admin/class-deactivationform.php',
         'Leadin\\admin\\Gutenberg' => __DIR__ . '/../..' . '/src/admin/class-gutenberg.php',
@@ -24,11 +25,18 @@ class ComposerStaticInit82c9f43e6cfe7a01d4033ba16d363513
         'Leadin\\admin\\MenuConstants' => __DIR__ . '/../..' . '/src/admin/class-menuconstants.php',
         'Leadin\\admin\\NoticeManager' => __DIR__ . '/../..' . '/src/admin/class-noticemanager.php',
         'Leadin\\admin\\PluginActionsManager' => __DIR__ . '/../..' . '/src/admin/class-pluginactionsmanager.php',
+        'Leadin\\admin\\ReviewBanner' => __DIR__ . '/../..' . '/src/admin/class-reviewbanner.php',
+        'Leadin\\admin\\ReviewController' => __DIR__ . '/../..' . '/src/admin/class-reviewcontroller.php',
         'Leadin\\admin\\Routing' => __DIR__ . '/../..' . '/src/admin/class-routing.php',
         'Leadin\\admin\\api\\ApiGenerator' => __DIR__ . '/../..' . '/src/admin/api/class-apigenerator.php',
         'Leadin\\admin\\api\\ApiMiddlewares' => __DIR__ . '/../..' . '/src/admin/api/class-apimiddlewares.php',
+        'Leadin\\admin\\api\\DisableInternalTrackingApi' => __DIR__ . '/../..' . '/src/admin/api/class-disableinternaltrackingapi.php',
         'Leadin\\admin\\api\\DisconnectApi' => __DIR__ . '/../..' . '/src/admin/api/class-disconnectapi.php',
+        'Leadin\\admin\\api\\GetPortalHubletApi' => __DIR__ . '/../..' . '/src/admin/api/class-getportalhubletapi.php',
         'Leadin\\admin\\api\\RegistrationApi' => __DIR__ . '/../..' . '/src/admin/api/class-registrationapi.php',
+        'Leadin\\admin\\api\\SkipReviewApi' => __DIR__ . '/../..' . '/src/admin/api/class-skipreviewapi.php',
+        'Leadin\\admin\\api\\TrackConsentApi' => __DIR__ . '/../..' . '/src/admin/api/class-trackconsentapi.php',
+        'Leadin\\admin\\api\\UpdateHubletApi' => __DIR__ . '/../..' . '/src/admin/api/class-updatehubletapi.php',
         'Leadin\\admin\\utils\\DeviceId' => __DIR__ . '/../..' . '/src/admin/utils/class-deviceid.php',
         'Leadin\\auth\\OAuth' => __DIR__ . '/../..' . '/src/auth/class-oauth.php',
         'Leadin\\auth\\OAuthCrypto' => __DIR__ . '/../..' . '/src/auth/class-oauthcrypto.php',
@@ -50,7 +58,7 @@ class ComposerStaticInit82c9f43e6cfe7a01d4033ba16d363513
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit82c9f43e6cfe7a01d4033ba16d363513::$classMap;
+            $loader->classMap = ComposerStaticInit4970ab0df62f13a7833385064991b918::$classMap;
 
         }, null, ClassLoader::class);
     }

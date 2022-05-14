@@ -3,9 +3,11 @@
 namespace Transbank\WooCommerce\WebpayRest\Controllers;
 
 use DateTime;
+use DateTimeZone;
+use Transbank\Webpay\WebpayPlus\Responses\TransactionCommitResponse;
 use Transbank\WooCommerce\WebpayRest\Helpers\SessionMessageHelper;
+use Transbank\WooCommerce\WebpayRest\Models\Transaction;
 use Transbank\WooCommerce\WebpayRest\TransbankSdkWebpayRest;
-use Transbank\WooCommerce\WebpayRest\TransbankWebpayOrders;
 use WC_Order;
 
 class ResponseController
@@ -25,23 +27,59 @@ class ResponseController
         $this->pluginConfig = $pluginConfig;
     }
 
+    /**
+     * @param $paymentTypeCode
+     *
+     * @return string
+     */
+    public static function getHumanReadableInstallemntsType($paymentTypeCode): string
+    {
+        $installmentTypes = [
+            'VD' => 'Venta Débito',
+            'VN' => 'Venta Normal',
+            'VC' => 'Venta en cuotas',
+            'SI' => '3 cuotas sin interés',
+            'S2' => '2 cuotas sin interés',
+            'NC' => 'N cuotas sin interés',
+        ];
+        $paymentCodeResult = isset($installmentTypes[$paymentTypeCode]) ? $installmentTypes[$paymentTypeCode] : 'Sin cuotas';
+
+        return $paymentCodeResult;
+    }
+
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Transbank\WooCommerce\WebpayRest\Exceptions\TokenNotFoundOnDatabaseException
+     */
     public function response($postData)
     {
+        if ($this->transactionWasTimeout()) {
+            $this->throwError('La transacción fue cancelada automáticamente por estar inactivo mucho tiempo en el formulario de pago de Webpay. Puede reintentar el pago');
+            do_action('transbank_webpay_plus_timeout_on_form');
+            wp_redirect(wc_get_checkout_url());
+            exit;
+        }
         $token_ws = $this->getTokenWs($postData);
-        $webpayTransaction = TransbankWebpayOrders::getByToken($token_ws);
+
+        $webpayTransaction = Transaction::getByToken($token_ws);
 
         $wooCommerceOrder = $this->getWooCommerceOrderById($webpayTransaction->order_id);
 
         if ($this->transactionWasCanceledByUser()) {
-            SessionMessageHelper::set('La transacción ha sido cancelada por el usuario', 'error');
-            if ($webpayTransaction->status !== TransbankWebpayOrders::STATUS_INITIALIZED || $wooCommerceOrder->is_paid()) {
-                $wooCommerceOrder->add_order_note('El usuario canceló la transacción en el formulario de pago, pero esta orden ya estaba pagada o en un estado diferente a INICIALIZADO');
+            $params = ['transbank_webpayplus_cancelled_order' => 1];
+            $redirectUrl = add_query_arg($params, wc_get_checkout_url());
 
-                return wp_safe_redirect($wooCommerceOrder->get_cancel_order_url());
+            if ($webpayTransaction->status !== Transaction::STATUS_INITIALIZED || $wooCommerceOrder->is_paid()) {
+                $wooCommerceOrder->add_order_note('El usuario canceló la transacción en el formulario de pago, pero esta orden ya estaba pagada o en un estado diferente a INICIALIZADO');
+                wp_safe_redirect($redirectUrl);
+
+                return;
             }
             $this->setOrderAsCancelledByUser($wooCommerceOrder, $webpayTransaction);
+            do_action('transbank_webpay_plus_transaction_cancelled_by_user', $wooCommerceOrder, $webpayTransaction);
+            wp_safe_redirect($redirectUrl);
 
-            return wp_safe_redirect($wooCommerceOrder->get_cancel_order_url());
+            return;
         }
 
         if ($wooCommerceOrder->is_paid()) {
@@ -49,6 +87,7 @@ class ResponseController
             //SessionMessageHelper::set('Orden <strong>ya ha sido pagada</strong>.', 'notice');
             $wooCommerceOrder->add_order_note('El usuario intentó pagar esta orden nuevamente, cuando esta ya '.
                 'estaba pagada.');
+            do_action('transbank_webpay_plus_already_paid_transaction', $wooCommerceOrder);
 
             return wp_safe_redirect($wooCommerceOrder->get_checkout_order_received_url());
         }
@@ -61,6 +100,7 @@ class ResponseController
                 $wooCommerceOrder->get_status().".\n".
                 'No se ejecutó captura del pago de esta solicitud.'
             );
+            do_action('transbank_webpay_plus_paying_transaction_that_does_not_needs_payment', $wooCommerceOrder);
 
             return wp_safe_redirect($wooCommerceOrder->get_checkout_order_received_url());
         }
@@ -70,10 +110,13 @@ class ResponseController
         if ($this->transactionIsApproved($result) && $this->validateTransactionDetails($result, $webpayTransaction)) {
             $this->completeWooCommerceOrder($wooCommerceOrder, $result, $webpayTransaction);
 
+            do_action('transbank_webpay_plus_transaction_approved', $wooCommerceOrder, $webpayTransaction);
+
             return wp_redirect($wooCommerceOrder->get_checkout_order_received_url());
         }
 
         $this->setWooCommerceOrderAsFailed($wooCommerceOrder, $webpayTransaction, $result);
+        do_action('transbank_webpay_plus_transaction_failed', $wooCommerceOrder, $webpayTransaction, $result);
 
         return wp_redirect($wooCommerceOrder->get_checkout_order_received_url());
     }
@@ -88,6 +131,8 @@ class ResponseController
         $token_ws = isset($data['token_ws']) ? $data['token_ws'] : (isset($data['TBK_TOKEN']) ? $data['TBK_TOKEN'] : null);
         if (!isset($token_ws)) {
             $this->throwError('No se encontró el token');
+            wp_redirect(wc_get_checkout_url());
+            exit;
         }
 
         return $token_ws;
@@ -105,19 +150,12 @@ class ResponseController
         return $wooCommerceOrder;
     }
 
-    protected function throwError($msg)
-    {
-        $error_message = 'Estimado cliente, le informamos que su orden termin&oacute; de forma inesperada: <br />'.$msg;
-        wc_add_notice(__('ERROR: ', 'transbank_webpay_plus_rest').$error_message, 'error');
-        exit();
-    }
-
     /**
      * @param WC_Order $wooCommerceOrder
      * @param array    $result
      * @param $webpayTransaction
      */
-    protected function completeWooCommerceOrder(WC_Order $wooCommerceOrder, $result, $webpayTransaction)
+    protected function completeWooCommerceOrder(WC_Order $wooCommerceOrder, TransactionCommitResponse $result, $webpayTransaction)
     {
         list($authorizationCode, $amount, $sharesNumber, $transactionResponse, $paymentCodeResult, $date_accepted, $sharesAmount, $paymentType) = $this->getTransactionDetails($result);
         $cardNumber = $result->cardDetail['card_number'];
@@ -151,10 +189,12 @@ class ResponseController
             $wooCommerceOrder
         );
 
-        wc_add_notice(__('Pago recibido satisfactoriamente', 'transbank_webpay_plus_rest'));
-        TransbankWebpayOrders::update(
+        Transaction::update(
             $webpayTransaction->id,
-            ['status' => TransbankWebpayOrders::STATUS_APPROVED, 'transbank_response' => json_encode($result)]
+            [
+                'status'             => Transaction::STATUS_APPROVED,
+                'transbank_status'   => $result->getStatus(),
+                'transbank_response' => json_encode($result), ]
         );
 
         $wooCommerceOrder->payment_complete();
@@ -196,9 +236,12 @@ class ResponseController
             );
         }
 
-        TransbankWebpayOrders::update(
+        Transaction::update(
             $webpayTransaction->id,
-            ['status' => TransbankWebpayOrders::STATUS_FAILED, 'transbank_response' => json_encode($result)]
+            [
+                'status'             => Transaction::STATUS_FAILED,
+                'transbank_response' => json_encode($result),
+            ]
         );
     }
 
@@ -246,28 +289,18 @@ class ResponseController
         $sharesNumber = isset($result->installmentsNumber) ? $result->installmentsNumber : null;
         $sharesAmount = isset($result->installmentsAmount) ? $result->installmentsAmount : null;
         $responseCode = isset($result->responseCode) ? $result->responseCode : null;
-        if ($responseCode == 0) {
+        if ($responseCode === 0) {
             $transactionResponse = 'Transacción Aprobada';
         } else {
             $transactionResponse = 'Transacción Rechazada';
         }
-        $installmentTypes = [
-            'VD' => 'Venta Débito',
-            'VN' => 'Venta Normal',
-            'VC' => 'Venta en cuotas',
-            'SI' => '3 cuotas sin interés',
-            'S2' => '2 cuotas sin interés',
-            'NC' => 'N cuotas sin interés',
-        ];
-        $paymentCodeResult = isset($installmentTypes[$paymentTypeCode]) ? $installmentTypes[$paymentTypeCode] : 'Sin cuotas';
+        $paymentCodeResult = self::getHumanReadableInstallemntsType($paymentTypeCode);
 
-        $paymentType = __('Crédito', 'transbank_webpay_plus_rest');
-        if ($paymentTypeCode == 'VD') {
-            $paymentType = __('Débito', 'transbank_webpay_plus_rest');
-        }
+        $paymentType = $this->getHumanReadablePaymentType($paymentTypeCode);
 
         $transactionDate = isset($result->transactionDate) ? $result->transactionDate : null;
-        $date_accepted = new DateTime($transactionDate);
+        $date_accepted = new DateTime($transactionDate, new DateTimeZone('UTC'));
+        $date_accepted->setTimeZone(new DateTimeZone(wc_timezone_string()));
 
         return [$authorizationCode, $amount, $sharesNumber, $transactionResponse, $paymentCodeResult, $date_accepted, $sharesAmount, $paymentType];
     }
@@ -275,11 +308,11 @@ class ResponseController
     protected function setOrderAsCancelledByUser(WC_Order $order_info, $webpayTransaction)
     {
         // Transaction aborted by user
-        $order_info->add_order_note(__('Webpay Plus: Pago abortado por el usuario en el fomulario de pago', 'transbank_webpay_plus_rest'));
+        $order_info->add_order_note(__('Webpay Plus: Pago abortado por el usuario en el formulario de pago', 'transbank_wc_plugin'));
         $order_info->update_status('cancelled');
-        TransbankWebpayOrders::update(
+        Transaction::update(
             $webpayTransaction->id,
-            ['status' => TransbankWebpayOrders::STATUS_ABORTED_BY_USER]
+            ['status' => Transaction::STATUS_ABORTED_BY_USER]
         );
     }
 
@@ -293,6 +326,18 @@ class ResponseController
         $token = $_POST['TBK_TOKEN'] ?? $_GET['TBK_TOKEN'] ?? null;
 
         return $buyOrder && $sessionId && $token;
+    }
+
+    /**
+     * @return bool
+     */
+    private function transactionWasTimeout()
+    {
+        $buyOrder = $_POST['TBK_ORDEN_COMPRA'] ?? $_GET['TBK_ORDEN_COMPRA'] ?? null;
+        $sessionId = $_POST['TBK_ID_SESION'] ?? $_GET['TBK_ID_SESION'] ?? null;
+        $token = $_POST['TBK_TOKEN'] ?? $_GET['TBK_TOKEN'] ?? null;
+
+        return $buyOrder && $sessionId && !$token;
     }
 
     /**
@@ -348,5 +393,35 @@ class ResponseController
             </div>
         ";
         $wooCommerceOrder->add_order_note($transactionDetails);
+    }
+
+    /**
+     * @param $paymentTypeCode
+     *
+     * @return string|void
+     */
+    public static function getHumanReadablePaymentType($paymentTypeCode)
+    {
+        if ($paymentTypeCode != null) {
+            $paymentType = __('Crédito', 'transbank_wc_plugin');
+        } else {
+            $paymentType = '';
+        }
+        if ($paymentTypeCode == 'VD') {
+            $paymentType = __('Débito', 'transbank_wc_plugin');
+        } elseif ($paymentTypeCode == 'VP') {
+            $paymentType = __('Prepago', 'transbank_wc_plugin');
+        }
+
+        return $paymentType;
+    }
+
+    /**
+     * @param string $msg
+     */
+    protected function throwError(string $msg)
+    {
+        $error_message = __($msg);
+        wc_add_notice($error_message, 'error');
     }
 }

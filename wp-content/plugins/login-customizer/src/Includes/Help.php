@@ -23,11 +23,14 @@ class Help {
 		global $wpdb;
 		new Essentials;
 
-		$settings  			= get_option( 'login_customizer_settings' );
-		$login_customizer 	= get_option( 'login_customizer_options' );
-		$login_order 	    = isset( $settings['login_order'] ) ? $settings['login_order'] : 'Default';
-		$customization 		= isset( $login_customizer ) ? print_r( $login_customizer, true ) : 'No customization yet';
-
+		$settings         = get_option( 'logincust_setting' );
+		$login_customizer = get_option( 'login_customizer_options' );
+		$login_order      = isset( $settings['login_order'] ) ? $settings['login_order'] : 'Default';
+		$auto_remember_me = isset( $settings['auto_remember_me'] ) ? $settings['auto_remember_me'] : 'off';
+		$auto_remember_me = ( 'off' === $auto_remember_me ) ? 'Disabled' : 'Enabled';
+		$customization    = isset( $login_customizer ) ? print_r( $login_customizer, true ) : 'No customization yet';
+		$enable_switcher  = isset( $settings['enable_language_switcher'] ) ? $settings['enable_language_switcher'] : 'off';
+		$enable_switcher  = ( 'off' === $enable_switcher ) ? 'Disabled' : 'Enabled';
 
 		$html = '### Begin System Info ###' . "\n\n";
 
@@ -46,8 +49,19 @@ class Help {
 		$html .= "\n" . '-- Login Customizer Configuration --' . "\n\n";
 		$html .= 'Plugin Version:           ' . LOGINCUST_FREE_VERSION . "\n";
 		$html .= 'Login Order:              ' . ucfirst( $login_order ) . "\n";
+		$html .= 'Auto Remember Me:         ' . ucfirst( $auto_remember_me ) . "\n";
 
-		// Server Configuration
+		/**
+		 * Add option to remove language switcher option
+		 *
+		 * @since 2.1.7
+		 */
+		if ( version_compare( $GLOBALS['wp_version'], '5.9', '>=' ) && ! empty( get_available_languages() ) ) {
+
+		$html .= 'Language Switcher:        ' . ucfirst( $enable_switcher ) . "\n";
+
+		}
+		// Server Configuration.
 		$html .= "\n" . '-- Server Configuration --' . "\n\n";
 		$html .= 'Operating System:         ' . php_uname( 's' ) . "\n";
 		$html .= 'PHP Version:              ' . PHP_VERSION . "\n";
@@ -77,10 +91,13 @@ class Help {
 		$html .= "\n" . '-- WordPress Active Plugins --' . "\n\n";
 		$plugins = get_plugins();
 		$active_plugins = get_option( 'active_plugins', array() );
-		foreach( $plugins as $plugin_path => $plugin ) {
-			if( !in_array( $plugin_path, $active_plugins ) )
+
+
+		foreach ( $plugins as $plugin_path => $plugin ) {
+			if ( ! in_array( $plugin_path, $active_plugins, true ) ) {
 				continue;
-			$html .= $plugin['Name'] . ': v(' . $plugin['Version'] . ")\n";
+				$html .= $plugin['Name'] . ': v(' . $plugin['Version'] . ")\n";
+			}
 		}
 
 		// WordPress inactive plugins

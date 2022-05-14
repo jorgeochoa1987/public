@@ -19,6 +19,16 @@ class THWCFD_Utils {
 		
 	}
 
+	public static function wcfd_capability() {
+		$allowed = array('manage_woocommerce', 'manage_options');
+		$capability = apply_filters('thwcfd_required_capability', 'manage_woocommerce');
+
+		if(!in_array($capability, $allowed)){
+			$capability = 'manage_woocommerce';
+		}
+		return $capability;
+	}
+
 	public static function is_address_field($name){
 		$address_fields = array(
 			'billing_address_1', 'billing_address_2', 'billing_state', 'billing_postcode', 'billing_city',
@@ -104,8 +114,24 @@ class THWCFD_Utils {
 		return $return;
 	}
 
+	public static function is_wc_handle_custom_field($field){
+		$name = isset($field['name']) ? $field['name'] : '';
+		$special_fields = array();
+		
+		if(version_compare(THWCFD_Utils::get_wc_version(), '5.6.0', ">=")){
+			$special_fields[] = 'shipping_phone';
+		}
+
+		$special_fields = apply_filters('thwcfd_wc_handle_custom_field', $special_fields);
+
+		if($name && in_array($name, $special_fields)){
+			return true;
+		}
+		return false;
+	}	
+
 	public static function update_fields($key, $fields){
-		$result = update_option('wc_fields_' . $key, $fields);
+		$result = update_option('wc_fields_' . $key, $fields, 'no');
 		return $result;
 	}
 
@@ -166,17 +192,22 @@ class THWCFD_Utils {
 		return is_array($options) ? $options : array();
 	}
 
-	public static function prepare_options_array($options_json){
+	public static function prepare_options_array($options_json, $type = 'radio'){
 		$options_json = rawurldecode($options_json);
 		$options_arr = json_decode($options_json, true);
 		$options = array();
 		
 		if($options_arr){
+			$i = 0;
 			foreach($options_arr as $option){
 				$okey = isset($option['key']) ? $option['key'] : '';
 				$otext = isset($option['text']) ? $option['text'] : '';
-				//$okey = $okey ? $okey : $otext;
-
+				if($i == 0 && $type == 'select'){
+					$okey = $okey ? $okey : '';
+				}else{
+					$okey = $okey ? $okey : sanitize_key($otext);
+				}
+				$i++;
 				//if($okey || $otext){
 					$options[$okey] = $otext;
 				//}
@@ -214,6 +245,25 @@ class THWCFD_Utils {
 			if(isset($options[$value]) && !empty($options[$value])){
 				$value = $options[$value];
 			}
+		}elseif($type === 'checkboxgroup' || $type === 'multiselect'){
+			$options = isset($field['options']) ? $field['options'] : array();
+
+			$value_arr = explode(',', $value);
+			//THWCFD_Utils
+			if(is_array($value_arr)){
+				$new_value = array();
+				foreach($value_arr as $single_value){
+					if(isset($options[$single_value]) && !empty($options[$single_value])){
+						$new_value[] = $options[$single_value];
+					}else{
+						$new_value[] = $single_value;
+					}
+				}
+				$value = implode(', ', $new_value);
+			}elseif(isset($options[$value]) && !empty($options[$value])){
+				$value = $options[$value];
+			}
+				
 		}
 
 		return $value;
@@ -336,6 +386,20 @@ class THWCFD_Utils {
 			}
 		}
 		echo $text;
+	}
+	/***********************************
+	 ----- i18n functions - END ------
+	 ***********************************/
+
+	public static function get_wc_version() {
+		if(!class_exists('WooCommerce')){
+		    return;
+		}
+
+		if(defined('WC_VERSION')) {
+		    return WC_VERSION;
+		}
+		return;
 	}
 
 	public static function write_log ( $log )  {

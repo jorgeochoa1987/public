@@ -38,10 +38,6 @@ defined( 'ABSPATH' ) || exit;
 			</p>
 
 		<?php else : ?>
-			<div class="alert alert-primary" role="alert">
-				<h5 class="azul">¡Gracias por suscribirte a Matific con SBS Digital!</h5>
-				<p>En las próximas 24 horas te enviaremos un mail con tus credenciales para ingresar a la plataforma Matific, a la que también podrás acceder desde <a href="https://sbsdigital.cl/usuario/">aquí</a></p>
-			</div>
 
 			<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', esc_html__( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 

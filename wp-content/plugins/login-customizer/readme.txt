@@ -1,10 +1,10 @@
 === Custom Login Page Customizer ===
 Requires at least: 4.0
-Tested up to: 5.8
+Tested up to: 5.9
 Contributors: hardeepasrani, hiddenpearls
 Author URI: https://loginpress.pro/?utm_source=login-customizer-lite&utm_medium=author-url-link
 Tags: login, customizer, logo, login logo, login customizer, login page,admin, branding, customization, custom login, error, login error, custom login pro
-Stable tag: 2.1.6
+Stable tag: 2.1.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,14 +46,21 @@ Please visit <a target="_blank" rel="nofollow" href="https://loginpress.pro/?utm
 
 == Upgrade Notice ==
 
-= 2.1.6 =
-* Update immediately - compatible with 5.8
+= 2.1.8 =
+* Update immediately - compatible with 5.9
 
 == Changelog ==
 
+= 2.1.8 – 2022-03-08 =
+* Security Fix: Update the Freemius SDK v2.4.3.
+
+= 2.1.7 – 2022-02-18 =
+* New Feature: Introducing Language Switcher (On / Off) setting.
+* Compatibility: Compatible with WordPress 5.9.
+
 = 2.1.6 - 2021-09-07 =
-* Bugfix: Fiexed PHP error for default Logo Height.
-* Bugfix: Login Customizer Page delation issue.
+* Bugfix: Fixed PHP error for default Logo Height.
+* Bugfix: Login Customizer Page deletion issue.
 * Enhancement: Create Uninstall.php for removing plugin options from DB & Login Customizer Page on uninstalling the plugin.  
 
 = 2.1.5 - 2021-07-23 =
@@ -67,7 +74,7 @@ Please visit <a target="_blank" rel="nofollow" href="https://loginpress.pro/?utm
 = 2.1.3 - 2021-04-17 =
 
 * Enhancement: Compatible with <a href="https://wordpress.org/plugins/two-factor/" rel="plugin">2FA Two Factor Authentication</a> plugin.
-* Compatibility: Compatibile with WordPress 5.7.
+* Compatibility: Compatible with WordPress 5.7.
 * Compatibility: Compatible with PHP 8.0.
 
 = 2.1.2 - 2021-02-20 =
@@ -83,7 +90,7 @@ Please visit <a target="_blank" rel="nofollow" href="https://loginpress.pro/?utm
 * New Feature: Introducing "Log Data Page" with System Info for troubleshooting.
 * Enhancement: Code optimization and plugin speed improvements.
 * Enhancement: Introducing Login Customizer dashicon.
-* Compatibility: Compatibile with WordPress 5.6.
+* Compatibility: Compatible with WordPress 5.6.
 
 = 2.1.0 - 2021-01-12  = 
 
@@ -91,7 +98,7 @@ Please visit <a target="_blank" rel="nofollow" href="https://loginpress.pro/?utm
 * Bugfix: Fixed WordPress function deprecation error.
 * Bugfix: Fixed customizer settings irregularities.
 * Enhancement: Optimized Code.
-* Compatibility: Compatibile with WordPress 5.6.
+* Compatibility: Compatible with WordPress 5.6.
 
 = 2.0.0 - 2018-08-06  = 
 
@@ -110,7 +117,7 @@ Please visit <a target="_blank" rel="nofollow" href="https://loginpress.pro/?utm
 
 = 1.2.1 - 2018-01-05  = 
 
-* Improves compatiblity with latest WordPress version.
+* Improves Compatible with latest WordPress version.
 * Sync ThemeIsle SDK.
 
 

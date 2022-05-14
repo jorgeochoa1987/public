@@ -2,8 +2,8 @@
 
 namespace Transbank\Webpay;
 
+use Transbank\Contracts\RequestService;
 use Transbank\Utils\EnvironmentManager;
-use Transbank\Utils\HttpClient;
 use Transbank\Webpay\WebpayPlus\MallTransaction;
 use Transbank\Webpay\WebpayPlus\Transaction;
 
@@ -42,25 +42,25 @@ class WebpayPlus extends EnvironmentManager
     protected static $mallTransactionClass = MallTransaction::class;
 
     /**
-     * @param Options|null    $options
-     * @param HttpClient|null $httpClient
+     * @param Options|null        $options
+     * @param RequestService|null $requestService
      *
      * @return Transaction
      */
-    public static function transaction(Options $options = null, HttpClient $httpClient = null)
+    public static function transaction(Options $options = null, RequestService $requestService = null)
     {
-        return new self::$transactionClass($options, $httpClient);
+        return new static::$transactionClass($options, $requestService);
     }
 
     /**
-     * @param Options|null    $options
-     * @param HttpClient|null $httpClient
+     * @param Options|null        $options
+     * @param RequestService|null $requestService
      *
      * @return MallTransaction
      */
-    public static function mallTransaction(Options $options = null, HttpClient $httpClient = null)
+    public static function mallTransaction(Options $options = null, RequestService $requestService = null)
     {
-        return new self::$mallTransactionClass($options, $httpClient);
+        return new static::$mallTransactionClass($options, $requestService);
     }
 
     /**
@@ -68,7 +68,7 @@ class WebpayPlus extends EnvironmentManager
      */
     public static function setTransactionClass($transactionClass)
     {
-        self::$transactionClass = $transactionClass;
+        static::$transactionClass = $transactionClass;
     }
 
     /**
@@ -76,7 +76,7 @@ class WebpayPlus extends EnvironmentManager
      */
     public static function setMallTransactionClass($mallTransactionClass)
     {
-        self::$mallTransactionClass = $mallTransactionClass;
+        static::$mallTransactionClass = $mallTransactionClass;
     }
 
     /*
@@ -87,21 +87,21 @@ class WebpayPlus extends EnvironmentManager
 
     public static function configureForTesting()
     {
-        self::configureForIntegration(static::DEFAULT_COMMERCE_CODE);
+        static::configureForIntegration(static::DEFAULT_COMMERCE_CODE);
     }
 
     public static function configureForTestingDeferred()
     {
-        self::configureForIntegration(static::DEFAULT_DEFERRED_COMMERCE_CODE);
+        static::configureForIntegration(static::DEFAULT_DEFERRED_COMMERCE_CODE);
     }
 
     public static function configureForTestingMall()
     {
-        self::configureForIntegration(static::DEFAULT_MALL_COMMERCE_CODE);
+        static::configureForIntegration(static::DEFAULT_MALL_COMMERCE_CODE);
     }
 
     public static function configureForTestingMallDeferred()
     {
-        self::configureForIntegration(static::DEFAULT_MALL_DEFERRED_COMMERCE_CODE);
+        static::configureForIntegration(static::DEFAULT_MALL_DEFERRED_COMMERCE_CODE);
     }
 }

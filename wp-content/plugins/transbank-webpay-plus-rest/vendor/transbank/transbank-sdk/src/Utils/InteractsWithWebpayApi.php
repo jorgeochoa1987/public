@@ -2,7 +2,6 @@
 
 namespace Transbank\Utils;
 
-use GuzzleHttp\Exception\GuzzleException;
 use Transbank\Contracts\RequestService;
 use Transbank\Webpay\Exceptions\WebpayRequestException;
 use Transbank\Webpay\Options;
@@ -40,9 +39,8 @@ trait InteractsWithWebpayApi
     /**
      * @param $method
      * @param $endpoint
-     * @param array $payload
+     * @param array|null $payload
      *
-     * @throws GuzzleException
      * @throws WebpayRequestException
      *
      * @return mixed

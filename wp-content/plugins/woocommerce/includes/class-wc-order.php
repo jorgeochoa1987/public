@@ -71,6 +71,7 @@ class WC_Order extends WC_Abstract_Order {
 			'state'      => '',
 			'postcode'   => '',
 			'country'    => '',
+			'phone'      => '',
 		),
 		'payment_method'       => '',
 		'payment_method_title' => '',
@@ -743,6 +744,17 @@ class WC_Order extends WC_Abstract_Order {
 	}
 
 	/**
+	 * Get shipping phone.
+	 *
+	 * @since  5.6.0
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return string
+	 */
+	public function get_shipping_phone( $context = 'view' ) {
+		return $this->get_address_prop( 'phone', 'shipping', $context );
+	}
+
+	/**
 	 * Get the payment method.
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
@@ -869,7 +881,7 @@ class WC_Order extends WC_Abstract_Order {
 		$address = $this->get_address( 'shipping' );
 
 		// Remove name and company before generate the Google Maps URL.
-		unset( $address['first_name'], $address['last_name'], $address['company'] );
+		unset( $address['first_name'], $address['last_name'], $address['company'], $address['phone'] );
 
 		$address = apply_filters( 'woocommerce_shipping_address_map_url_parts', $address, $this );
 
@@ -1233,6 +1245,17 @@ class WC_Order extends WC_Abstract_Order {
 	}
 
 	/**
+	 * Set shipping phone.
+	 *
+	 * @since 5.6.0
+	 * @param string $value Shipping phone.
+	 * @throws WC_Data_Exception Throws exception when invalid data is found.
+	 */
+	public function set_shipping_phone( $value ) {
+		$this->set_address_prop( 'phone', 'shipping', $value );
+	}
+
+	/**
 	 * Set the payment method.
 	 *
 	 * @param string $payment_method Supports WC_Payment_Gateway for bw compatibility with < 3.0.
@@ -1579,7 +1602,7 @@ class WC_Order extends WC_Abstract_Order {
 	 * @return string
 	 */
 	public function get_checkout_order_received_url() {
-		$order_received_url = wc_get_endpoint_url( 'checkout/order-received', $this->get_id(), wc_get_checkout_url() );
+		$order_received_url = wc_get_endpoint_url( 'order-received', $this->get_id(), wc_get_checkout_url() );
 		$order_received_url = add_query_arg( 'key', $this->get_order_key(), $order_received_url );
 
 		return apply_filters( 'woocommerce_get_checkout_order_received_url', $order_received_url, $this );

@@ -3,7 +3,7 @@
   "description": "Transbank SDK",
   "keywords": ["payments", "transbank", "api", "sdk"],
   "require": {
-      "php": ">=5.6.0",
+      "php": ">=7.0",
       "ext-curl": "*",
       "ext-json": "*",
       "ext-mbstring": "*",
@@ -11,14 +11,20 @@
   },
     "require-dev": {
       "phpunit/phpunit": "^9",
-      "satooshi/php-coveralls": "~0.6.1",
       "squizlabs/php_codesniffer": "~2.0",
-    "dms/phpunit-arraysubset-asserts": "^0.2.1"
+      "dms/phpunit-arraysubset-asserts": "^0.2.1"
     },
     "autoload": {
       "psr-4": {
         "Transbank\\": [
           "src/"
+        ]
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "Tests\\": [
+          "tests/"
         ]
       }
     },

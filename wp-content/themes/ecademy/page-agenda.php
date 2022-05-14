@@ -12,6 +12,7 @@
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
+      locale:'es' ,
       initialDate: '2020-09-12',
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
@@ -112,166 +113,314 @@
   }
 
 </style>
-
 <?php if(is_user_logged_in()){ ?>
-
-
 	<?php
    $cliente = new WC_Customer (get_current_user_id());
-
    $nomUsuario = $cliente->get_display_name();
-
-
-   
 ?>
-<div class="container">
-    <div class="usuario">
+  <div class=" container">
+      <div class="subcontainer">
+      <div class="usuario"> 
+                <?php if(isset($_GET['exito'])){ ?>
+                <div class="alert alert-success" role="alert">
+                    Tu solicitud fue enviada correctamente nos pondremos en contacto.
+                </div>
+                <?php } ?>
+                <?php if(isset($_GET['error'])){ ?>
+                <div class="alert alert-danger" role="alert">
+                    Todos los campos del formulario son obligatorios
+                </div>
+                <?php } ?>
+        </did>
+  </div> 
 
-        <?php if(isset($_GET['exito'])){ ?>
-        <div class="alert alert-success" role="alert">
-            Tu solicitud fue enviada correctamente nos pondremos en contacto.
-        </div>
-        <?php } ?>
-
-        <?php if(isset($_GET['error'])){ ?>
-        <div class="alert alert-danger" role="alert">
-            Todos los campos del formulario son obligatorios
-        </div>
-        <?php } ?>
-
-        <?php 
-        $user_id =get_current_user_id();
-        $args = array(
-            'customer_id' => $user_id
-        );
-         $orders = wc_get_orders($args);
-         foreach ( $orders as $orderchild ) {
-          // echo $ido = $orderchild->id.'<br>';
-      $order_data = $orderchild->get_data(); // The Order data
-      $order_id = $order_data['id']; 
-
-    $user_id = $order_id;
-  $field ="additional_nom_alum";
-
-    $wpdb; 
-    $results = $wpdb->get_results( "SELECT `meta_value` FROM `wp_postmeta` WHERE meta_key = 'additional_nom_alum' and `post_id` = $user_id;" ); 
-    // Utilizando el superglobal  
-
-    echo json_encode($results);
-    }
-       ?>
-
-        <h3> Estás viendo la agenda de  <?php echo json_encode($results); ?></h3>
-        <div class="info">
-     
-            <p class="negrita">En esta sección puedes agendar tus sesiones de clases online, ver tus sesiones disponibles, cancelar clases y más.
-</p>
-<h4 class="titulo-azul">¿Con cuál profesor quieres agendar tu próxima sesión?
- </h4>
- <h4 class="titulo-azul"> Haz clic en el calendario y agenda tus sesiones de clases online </h4>
- <div class="calendario">
- <div id='calendar'></div>
+      
 
 
- </div> 
-        
-        </div>
-        <hr>
-		<h4 class="titulo-azul">Tus Sesiones disponibles:</h4>
-
-        <div class="cuadro-cursos-agenda">
-
-        <?php
-       
-$user_id =get_current_user_id();
-        $args = array(
-            'customer_id' => $user_id
-        );
-        $orders = wc_get_orders($args);
-        
-           foreach ( $orders as $orderchild ) {
-            // echo $ido = $orderchild->id.'<br>';
-        $order_data = $orderchild->get_data(); // The Order data
-        $order_id = $order_data['id'];
-        $order_currency = $order_data['currency'];
-        $order_status = $order_data['status'];    
-        // echo $order_data ;
-        // echo $order_id ;
-        // echo $order_currency ;
-        // echo $order_status; 
-
-        foreach ($orderchild->get_items() as $key => $lineItem) {
-            $product_id = $lineItem['product_id'];
-            $product = wc_get_product( $product_id );
-            $name = $lineItem->get_name(); 
-            $image = wp_get_attachment_image_src( get_post_thumbnail_id(  $product_id ), 'single-post-thumbnail' );
-if ($image[0]==''){$image[0]="http://localhost:8888/sbs/public/wp-content/uploads/2021/07/placeholder.png";}
-            
-            ?> 
-            
-
-         <div class="info-azul-bk imagen">
-		 <div class="mid-row">
-		 <a href="<?php if($name=='Agenda y Aula Clases on line')
-                { echo 'http://localhost:8888/sbs/public/agenda/'; }
-                else { echo 'https://www.matific.com/cl/es-ar/login-page/';} 
-                ?>"target="_blank" >
-                <img src="<?php echo $image[0]; ?>" data-id="<?php echo $id; ?>" class="clases-prod" /> </a>
-		 </div>
-		 <div class="mid-row">
-			 <div class="white-box">
-				 <p class="clasesp">Sesiones Utilizadas 00</p>
-				 <p class="clasesp"> Sesiones Agendadas 00</p>
-				 <p class="clasesp">Sesiones Disponibles 00</p>
-			 </div>
-		 </div>
-		<div class="full-row">
-		  <a class="buttonblue"href=" http://localhost:8888/sbs/public/shop/"> Comprar más sesiones </a>
-		</div>
-        </div>
-
-
-  <?php      }
-    } 
-     
-        ?>
-       
-           
-        
-            
-        </div>
-
-		<h4 class="titulo-azul">	Conéctate a tus clases online agendadas aquí</h4>
-		<div class="cuadro-cursos-agenda">
-		<div class="info-white-bk imagen">
-		 <div class="mid-row">
-		 <img src=" http://localhost:8888/sbs/public/wp-content/uploads/2021/07/placeholder.png" class="clases-prod" /> </a>
-
-		 </div>
-		 <div class="mid-row">
-			 <div class="white-box">
-				 <p class="clasesp">Sesiones Utilizadas 00</p>
-				 <p class="clasesp"> Sesiones Utilizadas 00</p>
-				 <p class="clasesp">Sesiones Utilizadas 00</p>
-			 </div>
-		 </div>
-		<div class="full-row">
-		  <a class="buttonblue"href=""> Ingresar a la sala de clases </a>
-		</div>
-        </div>
-		</div>
-    
-
-        <div class="row">
-         
+<div class="row">
+<div class="col-md-6">
+    <?php 
+    $table_name = $wpdb->prefix.'estudiantes';
+    $schools = $wpdb->get_results($wpdb->prepare("SELECT id,nombre,edad,curso,apellido,tutor from $table_name where tutor=%s", $cliente->id));
+    foreach ($schools as $s) { 
+    $name = $s->nombre;
+    $last = $s->apellido;
+    $old = $s->edad;
+    $course = $s->curso;
+    $tutor = $s->tutor;
+    ?>
+    <?php }?> 
+    <h3 class="subtitle"> Estás viendo la agenda de <strong class="blue"> <?php echo $name." ";  echo $last;?></strong></h3>
+    <td class="manage-column ss-list-width"><?php echo $row->nombre; ?></td> <td class="manage-column ss-list-width"><?php echo $row->apellido; ?></td>
 </div>
+<div class="col-md-6">
+      <select name="" onclick="return false;" id="" class="choosestudent" name="students" id="student">
+      <option value=""  ><i class="fa-solid fa-arrows-rotate"></i>Cambiar de estudiante </option>
+      <?php 
+      $table_name = $wpdb->prefix.'estudiantes';
+      $schools = $wpdb->get_results($wpdb->prepare("SELECT id,nombre,edad,curso,apellido,tutor from $table_name where tutor=%s ", $cliente->id));
+      foreach ($schools as $s) { 
+      $name = $s->nombre;
+      $last = $s->apellido;
+      $old = $s->edad;
+      $course = $s->curso;
+      $tutor = $s->tutor;
+      ?>
+      <option value=" <?php echo  $name ;echo $last ;?>"> <?php echo  $name ;echo $last ;?></option>
+
+      <?php }?>  
+      </select>
+</div>
+  <div class="col-md-12">
+  <div class="info">
+        <p class="info">En esta sección puedes agendar tus sesiones de clases online, ver tus sesiones disponibles, cancelar clases y más.</p>
+      </div>
+  </div>
+  
+</div>
+ 
+  <div class="row">
+    <div class="col-md-12">
+       <h4 class="titulo-azul">¿Con cuál profesor quieres agendar tu próxima sesión?</h4>
+    </div>
+    <div class="col-md-6">
+    <input type="checkbox" id="Español" name="Español" value="Español">
+			<label for="Español"> Profesor  Luis Sepúlveda
+      <img src="../wp-content/themes/ecademy/assets/img/glifing.png" data-id="" alt="Clases Agenda" class="clases-prod-c" />
+
+      </label><br>
+
+    </div>
+    <div class="col-md-6">
+    <input type="checkbox" id="Español" name="Español" value="Español">
+			<label for="Español"> Profesor  Luis Sepúlveda
+      <img src="../wp-content/themes/ecademy/assets/img/matific.png" data-id="" alt="Clases Agenda" class="clases-prod-c" />
+
+</label><br>
+
+    </div>
+  </div>   
+<div class="row">
+  <div class="col-md-12">
+    <h4 class="titulo-azul"> Haz clic en el calendario y agenda tus sesiones de clases online </h4>
+    <div id='calendar'></div>
+  </div>
+</div>
+  <!--Init Section-->
+
+<div class="row">
+  <div class="col-md-12">
+     <h4 class="titulo-azul">Tus Sesiones disponibles:</h4>
+  </div> 
+  <!--Boxes-->
+    <div class="col-md-6">
+      <div class="row clases-estudiantes">
+            <div class="col-md-6">
+              <div class="center">
+                  <img src="../wp-content/themes/ecademy/assets/img/glifing.png" data-id="" alt="Clases Agenda" class="clases-prod" />
+                  <p class="text-prod">Profesor/a: <br> Dario Calderón</p>           
+              </div>  
+            </div>  
+            <div class="col-md-6">
+                  <div class="background-white">
+                    <p class="clasesp">Sesiones Utilizadas 00</p>
+                    <p class="clasesp"> Sesiones Agendadas 00</p>
+                    <p class="clasesp">Sesiones Disponibles 00</p>
+                  </div>
+            </div>        
+            <div class="col-md-12" style="text-align-last: center;padding: 26px 5px 10px;">
+              <a class="buttonblue"href=" ./usuario-store/"> Comprar más sesiones </a>
+           </div>   
+        </div> 
+        
+    </div>     
+  <!--End Boxes-->
+   <!--Boxes-->
+   <div class="col-md-6">
+      <div class="row clases-estudiantes">
+            <div class="col-md-6">
+              <div class="center">
+                  <img src="../wp-content/themes/ecademy/assets/img/matific.png" data-id="" alt="Clases Agenda" class="clases-prod" />
+                  <p class="text-prod">Profesor/a: <br> Dario Calderón</p>           
+              </div>  
+            </div>  
+            <div class="col-md-6">
+                  <div class="background-white">
+                    <p class="clasesp">Sesiones Utilizadas 00</p>
+                    <p class="clasesp"> Sesiones Agendadas 00</p>
+                    <p class="clasesp">Sesiones Disponibles 00</p>
+                  </div>
+            </div>        
+            <div class="col-md-12" style="text-align-last: center;padding: 26px 5px 10px;">
+              <a class="buttonblue"href=" ./usuario-store/"> Comprar más sesiones </a>
+           </div>   
+        </div> 
+        
+    </div>     
+  <!--End Boxes-->
+</div>  
+  <!--End Section-->
+
+
+<div class="col-md-12">
+<p class="orange-alert">  <i class='fas fa-exclamation-circle'></i>
+Recueda que puedes uttilizar tus sesiones hasta el 30 de marzo,para obeter mas días, renueva tu suscripción aquí</p>
+</div>
+<div class="row">
+<div class="col-md-12">
+  <h4 class="titulo-azul">	Conéctate a tus clases online agendadas aquí</h4>
+  <p class="info"> Tus proximas sesiones</p>
+</div>
+<!---->
+<div class="row">
+  <div class="col-md-6">
+      <div class="border-color">
+          <div class="row">
+              <div class="col-md-4">
+                  <img class="imgperfil-2" src="http://localhost:8888/sbs/public/wp-content/uploads/2021/07/team_2.jpg" alt="">
+              </div>
+              <div class="col-md-8">
+                    <p> Próxima sesión de clases  </p>
+                    <div class="col-md-12">
+                      <img src="../wp-content/themes/ecademy/assets/img/glifing.png" data-id="" alt="Clases Agenda" class="clases-prod" style="width: 41% !important;">
+                    </div>
+                      <p> Asignatura: <strong > Matemática  </strong> </p>
+                      <p> Estudiante: <strong > Simona Grez  </strong> </p>
+                      <p> profesor/a: <strong >Darío Calderón </strong> </p>
+              </div>
+          </div>
+          <div class="row">
+          <div class="col-md-12">
+               <p class="pink_result">
+               Martes 06
+de marzo   18:30 hrs. 
+               </p> 
+              </div>
+              <div class="col-md-12">
+              <button type="button" style="width: 100%;" class="btn btn-pink">Ingresar a la sala de clases</button> </div>
+              <div class="col-md-12" style="text-align-last: center;">
+              <a href="" data-toggle="modal" data-target="#modalSoporte"> Si tienes problemas para  asistir a esta clase haz clic aquí.</a>
+              </div>
+            
+          </div>
+    </div>   
+  </div>
+  <div class="col-md-6">
+      <div class="border-color">
+          <div class="row">
+              <div class="col-md-4">
+                  <img class="imgperfil-2" src="http://localhost:8888/sbs/public/wp-content/uploads/2021/07/team_2.jpg" alt="">
+              </div>
+              <div class="col-md-8">
+                    <p> Próxima sesión de clases  </p>
+                    <div class="col-md-12">
+                      <img src="../wp-content/themes/ecademy/assets/img/glifing.png" data-id="" alt="Clases Agenda" class="clases-prod" style="width: 41% !important;">
+                    </div>
+                      <p> Asignatura: <strong > Matemática  </strong> </p>
+                      <p> Estudiante: <strong > Simona Grez  </strong> </p>
+                      <p> profesor/a: <strong >Darío Calderón </strong> </p>
+              </div>
+          </div>
+          <div class="row">
+          <div class="col-md-12">
+               <p class="pink_result">
+               Martes 02
+de marzo   18:30 hrs. 
+               </p> 
+              </div>
+              <div class="col-md-12">
+              <button type="button" style="width: 100%;" class="btn btn-pink">Ingresar a la sala de clases</button> </div>
+              <div class="col-md-12" style="text-align-last: center;">
+              <a href="" data-toggle="modal" data-target="#modalSoporte"> Si tienes problemas para  asistir a esta clase haz clic aquí.</a>
+              </div>
+            
+          </div>
+    </div>   
+  </div>
+
+
+</div> 
+
+<!---->
+<br><br><br><br><br>
+
+<div class="col-md-6">
+<div class="cuadro-cursos-agenda">
+
+</div>
+</div>
+
+</div>
+
+</div>  
+
+
+
 
 
 <?php  }else{ 
-    wp_redirect('https://sbsdigital.cl/user-login/');
+wp_redirect('https://sbsdigital.cl/user-login/');
 } ?>
 
 
 
 
 <?php get_footer(); ?>
+
+
+
+
+<!-- modal de contacto -->
+<div
+    class="modal fade"
+    id="modalSoporte"
+    tabindex="-3"
+    role="dialog"
+    aria-labelledby="modalSoporte"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 30px;">
+            <div class="modal-header">
+
+                <div>
+                    <br><br>
+                    <h5 class="modal-title azul" id="exampleModalLabel">Cancelar sesión de clases agendada
+                    </h5>
+                    <p> Puedes cancelar una clase con hasta 6 horas de anticipación y reagendar una nueva en el calendario.
+</p>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <form
+                    action="<?php echo esc_url(admin_url('admin-post.php')); ?>"
+                    method="post">
+                    <input type="hidden" name="action" value="soporte">
+                  
+                    <div class="form-group">
+                      
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Motivo<span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="mensaje" name="txtMensaje" rows="3"></textarea>
+                    </div>
+                    <div class="form-group text-center">
+                            <small class="text-danger" id="msjValCont"> Si cancelas una clase con menos de 6 horas de anticipación o no atiendes la sesión agendada, esta se considerará utilizada.
+</small>
+                        </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="buttonclose">Cancelar Clase</button>
+                        <div class="form-group text-center">
+                            <small class="text-danger" id="msjValCont">*Por favor completa todos los campos</small>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

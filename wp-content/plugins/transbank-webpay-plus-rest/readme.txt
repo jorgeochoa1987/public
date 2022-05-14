@@ -1,19 +1,37 @@
-=== Transbank Webpay Plus REST ===
+=== Transbank Webpay REST ===
 Contributors: TransbankDevelopers
-Tags: transbank, webpay, rest, chile
+Tags: transbank, webpay, oneclick, webpay plus, rest, chile
 Requires at least: 4.0
-Tested up to: 5.6
-Requires PHP: 5.6
-Stable tag: 1.4.1
+Tested up to: 5.8
+Requires PHP: 7.0
+Stable tag: 1.5.3
 License: 3-Clause BSD License
 License URI: https://opensource.org/licenses/BSD-3-Clause
 
-Recibe pagos en línea con tarjetas de crédito, débito y prepago en tu WooCommerce a través de Webpay Plus.
+Recibe pagos en línea con tarjetas de crédito, débito y prepago en tu WooCommerce a través de Webpay Plus y Webpay Oneclick.
 
 == Description ==
-Recibe pagos en línea con tarjetas de crédito, débito y prepago en tu WooCommerce a través de Webpay Plus.
+Recibe pagos en línea con tarjetas de crédito, débito y prepago en tu WooCommerce a través de Webpay Plus y Webpay Oneclick
 
 == Changelog ==
+= 1.5.3 =
+* Se arregla información de pago al pagar con prepago
+* Se arregla caso en que transacción fallida queda anotada como exitosa
+
+= 1.5.2 =
+* Se agregan nuevos hooks para que los desarrolladores puedan mejorar su sitio e integrar mejores procesos. Algunos son: transbank_webpay_plus_transaction_failed, transbank_webpay_plus_transaction_approved, transbank_oneclick_refund_approved, transbank_oneclick_transaction_approved, transbank_oneclick_transaction_failed, transbank_oneclick_inscription_finished, transbank_oneclick_inscription_completed, transbank_oneclick_inscription_failed
+
+= 1.5.1 =
+* Se arregla warning por llamada a función que no existe en página de pago
+
+= 1.5.0 =
+* Se añade soporte para Oneclick Mall REST
+* Soporte para Refunds en Oneclick Mall
+* Soporte para subscripciones con OneClick Mall REST (WooCommerce Subscriptions)
+* Soporte para agregar múltiples tarjetas en cada usuario
+* La redirección de Webpay Plus ahora pasa directamente desde el checkout al formulario de pago (sin pasar por una pantalla intermedia como antes)
+* El resultado de los reembolsos ahora tiene mejor formato en las de notas del pedido.
+
 = 1.4.1 =
 * Ahora el API 1.2 de Transbank a veces redirige por GET al finalizar el flujo y el plugin no funcionaba bien cuando esto pasaba. Ya está arreglado.
 
@@ -78,6 +96,9 @@ Arreglado:
 * Initial release.
 
 == Upgrade Notice ==
+= 1.5.3
+* Se corrige reconocimiento de tipo de pago y si la transaccion fue exitosa
+
 = 1.4.1 =
 * Se utiliza el nuevo SDk de PHP versión 2.0
 * Ya no es compatible con PHP 5.6.

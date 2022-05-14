@@ -45,7 +45,7 @@ class Essentials {
 	 * @return void
 	 */
 	public function define_constants() {
-		
+
 		$this->define( 'LOGINCUST_FREE_URL', plugin_dir_url( __FILE__ ) );
 		$this->define( 'LOGINCUST_DIR_PATH', plugin_dir_path( __FILE__ ) );
 		$this->define( 'LOGINCUST_FREE_VERSION', $this->version );

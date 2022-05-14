@@ -1,7 +1,7 @@
 # Custom Login Page Customizer #
 **Stable tag:** trunk  
 **Requires at least:** 4.0  
-**Tested up to:** 5.6
+**Tested up to:** 5.9
 **Contributors:** [hardeepasrani](https://profiles.wordpress.org/hardeepasrani), [hiddenpearls](https://profiles.wordpress.org/hiddenpearls)
 **Author URI:** https://loginpress.pro/
 **Tags:** login, customizer, logo, login logo, login customizer, login page,admin, branding, customization, custom login, error, login error, custom login pro  
@@ -40,12 +40,20 @@ Please visit <a target="_blank" rel="nofollow" href="https://loginpress.pro/">th
 2. Another Great Custom Login Page Example
 
 ## Changelog ##
-### 2.0.1 - 2018-08-06  ###
 
-* Changed Ownership of the plugin
+= 2.1.7 – 2022-02-18 =
+* New Feature: Introducing Language Switcher (On / Off) setting.
+* Compatibility: Compatible with WordPress 5.9.
 
-### 2.0.0 - 2018-08-06  ###
+= 2.1.6 - 2021-09-07 =
+* Bugfix: Fiexed PHP error for default Logo Height.
+* Bugfix: Login Customizer Page delation issue.
+* Enhancement: Create Uninstall.php for removing plugin options from DB & Login Customizer Page on uninstalling the plugin.  
 
-* Added Template Feature
-* Added Instant Refresh for Controls
-* Fixed issue with Security plugins and Multisite
+= 2.1.5 - 2021-07-23 =
+* Enhancement: Optimized Code.
+* Compatibility: Compatible with WordPress 5.8.
+
+= 2.1.4 - 2021-06-16 =
+* New Feature: Introducing a new control for change wp-login.php page title.
+* Enhancement: Optimized Code & fix PHP 8.0 Error.

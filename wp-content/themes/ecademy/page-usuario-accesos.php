@@ -10,7 +10,7 @@
     $metas = $wpdb->get_results( 
         $wpdb->prepare("SELECT post_id FROM wp_postmeta where meta_key = 'e-mail_apoderado' AND meta_value = '".$cliente->data['email']."' ")
     );
-?>
+?> 
 
 <div class="container">
     <div class="configuracion">

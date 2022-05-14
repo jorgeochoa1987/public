@@ -1,4 +1,4 @@
-ó<?php
+<?php
 /**
  * Login Form
  *

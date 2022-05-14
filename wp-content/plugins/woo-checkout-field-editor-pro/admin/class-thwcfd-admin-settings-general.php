@@ -27,8 +27,17 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 		$this->page_id    = 'fields';
 		$this->section_id = 'billing';
 
-		$this->tabs = array( 'fields' => 'Checkout Fields', 'advanced_settings' => 'Advanced Settings', 'pro' => 'Premium Features');
-		$this->sections = array('billing' => 'Billing Fields', 'shipping' => 'Shipping Fields', 'additional' => 'Additional Fields');
+		$this->tabs = array(
+			'fields' => __('Checkout Fields', 'woo-checkout-field-editor-pro'),
+			'advanced_settings' => __('Advanced Settings', 'woo-checkout-field-editor-pro'),
+			'pro' => __('Premium Features', 'woo-checkout-field-editor-pro'),
+			'themehigh_plugins' => __('Other Free Plugins', 'woo-checkout-field-editor-pro'),
+		);
+		$this->sections = array(
+			'billing' => __('Billing Fields', 'woo-checkout-field-editor-pro'),
+			'shipping' => __('Shipping Fields', 'woo-checkout-field-editor-pro'),
+			'additional' => __('Additional Fields', 'woo-checkout-field-editor-pro'),
+		);
 	}
 
 	public static function instance() {
@@ -53,11 +62,17 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 	}
 
 	public function reset_to_default() {
+		$nonse = isset($_REQUEST['thwcfd_security_manage_fields']) ? $_REQUEST['thwcfd_security_manage_fields'] : false;
+		$capability = THWCFD_Utils::wcfd_capability();
+		if(!wp_verify_nonce($nonse, 'thwcfd_section_fields') || !current_user_can($capability)){
+			die();
+		}
+
 		delete_option('wc_fields_billing');
 		delete_option('wc_fields_shipping');
 		delete_option('wc_fields_additional');
 
-		return $this->print_notices('Checkout fields successfully reset', 'updated', true);
+		return $this->print_notices(__('Checkout fields successfully reset', 'woo-checkout-field-editor-pro'), 'updated', true);
 	}
 
 	public function render_page(){
@@ -92,7 +107,7 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
         <th colspan="4">
         	<input type="submit" name="save_fields" class="button-primary" value="<?php _e( 'Save changes', 'woo-checkout-field-editor-pro' ) ?>" style="float:right" />
             <input type="submit" name="reset_fields" class="button" value="<?php _e( 'Reset to default fields', 'woo-checkout-field-editor-pro' ) ?>" style="float:right; margin-right: 5px;" 
-			onclick="return confirm('Are you sure you want to reset to default fields? all your changes will be deleted.');"/>
+			onclick="return confirm('<?php _e('Are you sure you want to reset to default fields? all your changes will be deleted.', 'woo-checkout-field-editor-pro' ); ?>')"/>
         </th>  
     	<?php 
 	}
@@ -109,6 +124,9 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 		
 		if(isset($_POST['save_fields']))
 			echo $this->save_fields($section);
+
+		if(isset($_POST['reset_fields']))
+			echo $this->reset_to_default();
 
 		$fields = THWCFD_Utils::get_fields($section);	
 	
@@ -145,7 +163,7 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 						//$options_json = isset($field['options_json']) && $field['options_json'] ? htmlspecialchars($field['options_json']) : '';
 
 						$options_json = '';
-						if($type === 'select' || $type === 'radio'){
+						if($type === 'select' || $type === 'radio' || $type === 'checkboxgroup' || $type === 'multiselect'){
 							$options = isset($field['options']) ? $field['options'] : '';
 							$options_json = THWCFD_Utils::prepare_options_json($options);
 						}
@@ -162,10 +180,10 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 	                        </td>
 	                        <td class="td_select"><input type="checkbox" name="select_field"/></td>
 	                        <td class="td_name"><?php echo esc_attr( $name ); ?></td>
-	                        <td class="td_type"><?php echo $type; ?></td>
-	                        <td class="td_label"><?php THWCFD_Utils::et($label); ?></td>
-	                        <td class="td_placeholder"><?php THWCFD_Utils::et($placeholder); ?></td>
-	                        <td class="td_validate"><?php echo $validate; ?></td>
+	                        <td class="td_type"><?php echo esc_attr($type); ?></td>
+	                        <td class="td_label"><?php echo esc_html_e($label, 'woo-checkout-field-editor-pro'); ?></td>
+	                        <td class="td_placeholder"><?php echo esc_html_e($placeholder, 'woo-checkout-field-editor-pro'); ?></td>
+	                        <td class="td_validate"><?php echo esc_html($validate); ?></td>
 	                        <td class="td_required status"><?php echo $required_status; ?></td>
 	                        <td class="td_enabled status"><?php echo $enabled_status; ?></td>
 	                        <td class="td_edit action">
@@ -178,7 +196,8 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 	                	endforeach; 
 	                ?>
             	</tbody>
-			</table> 
+			</table>
+			<?php wp_nonce_field( 'thwcfd_section_fields', 'thwcfd_security_manage_fields' ); ?>
         </form>
         <?php
         $this->field_form->output_field_forms();
@@ -201,10 +220,17 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 	}
 
 	private function save_or_update_field($section, $action) {
+		$nonse = isset($_REQUEST['thwcfd_security_manage_field']) ? $_REQUEST['thwcfd_security_manage_field'] : false;
+		$capability = THWCFD_Utils::wcfd_capability();
+		if(!wp_verify_nonce($nonse, 'thwcfd_field_form') || !current_user_can($capability)){
+			die();
+		}
+
 		try {
 			$result = false;
 			$fields = THWCFD_Utils::get_fields($section);
 			$field = $this->prepare_field_from_posted_data($_POST);
+			$this->add_wpml_support($field);
 			$name = isset($field['name']) ? $field['name'] : false;
 
 			if($name){
@@ -213,7 +239,7 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 					$field['custom'] = 1;
 					$field['priority'] = $priority;
 				}else{
-					$oname = isset($_POST['i_oname']) ? trim(stripslashes($_POST['i_oname'])) : false;
+					$oname = isset($_POST['i_oname']) ? sanitize_key($_POST['i_oname']) : false;
 					if($name && $oname && $name !== $oname ){
 						unset($fields[$oname]);
 					}
@@ -225,26 +251,36 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 			$result = THWCFD_Utils::update_fields($section, $fields);
 			
 			if($result == true) {
-				$this->print_notices('Your changes were saved.', 'updated');
+				$this->print_notices(__('Your changes were saved.', 'woo-checkout-field-editor-pro' ), 'updated');
 			}else {
-				$this->print_notices('Your changes were not saved due to an error (or you made none!).', 'error');
+				$this->print_notices(__('Your changes were not saved due to an error (or you made none!).', 'woo-checkout-field-editor-pro'), 'error');
 			}
 		} catch (Exception $e) {
-			$this->print_notices('Your changes were not saved due to an error.', 'error');
+			$this->print_notices(__('Your changes were not saved due to an error.', 'woo-checkout-field-editor-pro'), 'error');
 		}
 	}
 	
 	private function save_fields($section) {
+		$nonse = isset($_REQUEST['thwcfd_security_manage_fields']) ? $_REQUEST['thwcfd_security_manage_fields'] : false;
+		$capability = THWCFD_Utils::wcfd_capability();
+		if(!wp_verify_nonce($nonse, 'thwcfd_section_fields') || !current_user_can($capability)){
+			die();
+		}
+
 		try {
-			$f_names = !empty( $_POST['f_name'] ) ? $_POST['f_name'] : array();	
+			$f_names = !empty( $_POST['f_name'] ) ? $_POST['f_name'] : array();
+			$f_names = array_map('sanitize_key', $f_names);
 			if(empty($f_names)){
-				$this->print_notices('Your changes were not saved due to no fields found.', 'error');
+				$this->print_notices(__('Your changes were not saved due to no fields found.', 'woo-checkout-field-editor-pro'), 'error');
 				return;
 			}
 			
-			$f_order   = !empty( $_POST['f_order'] ) ? $_POST['f_order'] : array();	
+			$f_order   = !empty( $_POST['f_order'] ) ? $_POST['f_order'] : array();
+			$f_order = array_map('absint', $f_order);
 			$f_deleted = !empty( $_POST['f_deleted'] ) ? $_POST['f_deleted'] : array();
+			$f_deleted = array_map('absint', $f_deleted);
 			$f_enabled = !empty( $_POST['f_enabled'] ) ? $_POST['f_enabled'] : array();
+			$f_enabled = array_map('absint', $f_enabled);
 						
 			$fields = THWCFD_Utils::get_fields($section);
 			
@@ -260,8 +296,8 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 						continue;
 					}
 
-					$order = isset($f_order[$i]) ? trim(stripslashes($f_order[$i])) : 0;
-					$enabled = isset($f_enabled[$i]) ? trim(stripslashes($f_enabled[$i])) : 0;
+					$order = isset($f_order[$i]) ? $f_order[$i] : 0;
+					$enabled = isset($f_enabled[$i]) ? $f_enabled[$i] : 0;
 					$priority = THWCFD_Utils::prepare_field_priority($fields, $order, false);
 					
 					$field = $fields[$name];
@@ -275,12 +311,12 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 			$result = THWCFD_Utils::update_fields($section, $fields);
 
 			if($result == true) {
-				$this->print_notices('Your changes were saved.', 'updated');
+				$this->print_notices(__('Your changes were saved.', 'woo-checkout-field-editor-pro'), 'updated');
 			}else {
-				$this->print_notices('Your changes were not saved due to an error (or you made none!).', 'error');
+				$this->print_notices(__('Your changes were not saved due to an error (or you made none!).', 'woo-checkout-field-editor-pro'), 'error');
 			}
 		} catch (Exception $e) {
-			$this->print_notices('Your changes were not saved due to an error.', 'error');
+			$this->print_notices(__('Your changes were not saved due to an error.', 'woo-checkout-field-editor-pro'), 'error');
 		}
 	}
 
@@ -296,13 +332,24 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 				$pvalue = isset($posted[$iname]) && $posted[$iname] ? 1 : 0;
 			}else if(isset($posted[$iname])){
 				//$pvalue = is_array($posted[$iname]) ? implode(',', $posted[$iname]) : trim(stripslashes($posted[$iname]));
-				$pvalue = is_array($posted[$iname]) ? $posted[$iname] : trim(stripslashes($posted[$iname]));
-			}
+				// $pvalue = is_array($posted[$iname]) ? $posted[$iname] : trim(stripslashes($posted[$iname]));
 
-			if($pname === 'class'){
-				//$pvalue = is_string($pvalue) ? array_map('trim', explode(',', $pvalue)) : $pvalue;
-				$pvalue = is_string($pvalue) ? preg_split('/(\s*,*\s*)*,+(\s*,*\s*)*/', $pvalue) : $pvalue;
-				$pvalue = is_array($pvalue) ? $pvalue : array();
+				if(($pname === 'type') || ($pname === 'name')){
+					$pvalue = !empty($posted[$iname]) ? sanitize_key($posted[$iname]) : "";
+				}else if(($pname === 'label')){
+					//$pvalue = !empty($posted[$iname]) ? htmlentities(stripslashes($posted[$iname])) : "";
+					$pvalue = !empty($posted[$iname]) ? wp_unslash(wp_filter_post_kses($posted[$iname])) : "";
+				}else if(($pname === 'validate')){
+					$pvalue = !empty($posted[$iname]) ? (array) $posted[$iname] : array();
+					$pvalue = array_map( 'sanitize_key', $pvalue );
+				}else if($pname === 'class'){
+					//$pvalue = is_string($pvalue) ? array_map('trim', explode(',', $pvalue)) : $pvalue;
+					$pvalue = !empty($posted[$iname]) ? $posted[$iname] : '';
+					$pvalue = is_string($pvalue) ? preg_split('/(\s*,*\s*)*,+(\s*,*\s*)*/', $pvalue) : array();
+					$pvalue = array_map('sanitize_key', $pvalue);
+				}else{
+					$pvalue = !empty($posted[$iname]) ? sanitize_text_field(wp_unslash($posted[$iname])) : "";
+				}
 			}
 
 			$field[$pname] = $pvalue;
@@ -310,39 +357,65 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 
 		$type = isset($field['type']) ? $field['type'] : '';
 		if(!$type){
-			$type = isset($posted['i_otype']) ? trim(stripslashes($posted['i_otype'])) : '';
+			$type = isset($posted['i_otype']) ? sanitize_key($posted['i_otype']) : '';
 			$field['type'] = $type;
 		}
 
 		$name = isset($field['name']) ? $field['name'] : '';
 		if(!$name){
-			$field['name'] = isset($posted['i_oname']) ? trim(stripslashes($posted['i_oname'])) : '';
+			$field['name'] = isset($posted['i_oname']) ? sanitize_key($posted['i_oname']) : '';
 		}
 
-		if($type === 'select'){
+		if($type === 'select' || $type === 'multiselect'){
 			$field['validate'] = '';
 
 		}else if($type === 'radio'){
 			$field['validate'] = '';
 			$field['placeholder'] = '';
 
+		}else if($type === 'number'){
+			$field['validate'] = array('number');
+
+		}else if($type === 'checkbox'){
+			if(isset($posted['i_checked'])){
+				$field['default'] = 1;
+			}else{
+				$field['default'] = '';
+			}
+
 		}
 
-		if($type === 'select' || $type === 'radio'){
+		if($type === 'select' || $type === 'radio' || $type === 'checkboxgroup' || $type === 'multiselect'){
 			$options_json = isset($posted['i_options_json']) ? trim(stripslashes($posted['i_options_json'])) : '';
-			$options_arr = THWCFD_Utils::prepare_options_array($options_json);
-			
-			//$field['options_json'] = $options_json;
+			$options_arr = THWCFD_Utils::prepare_options_array($options_json, $type);
+
+			$keys = array_keys($options_arr);
+			// $keys = array_map('sanitize_key', $keys);
+			$keys = array_map('sanitize_text_field', $keys);
+
+			$values = array_values($options_arr);
+			$values = array_map('htmlspecialchars', $values);
+
+			$options_arr = array_combine($keys, $values);
+
 			$field['options'] = $options_arr;
+
+			// // Sanitize default value same like option values
+			// $default_value = isset($field['default']) ? $field['default'] : '';
+			// if($default_value){
+			// 	$field['default'] = sanitize_key($default_value);
+			// }
+
+
 		}else{
 			$field['options'] = '';
 		}
 
-		$field['autocomplete'] = isset($posted['i_autocomplete']) ? $posted['i_autocomplete'] : '';
-		$field['priority'] = isset($posted['i_priority']) ? $posted['i_priority'] : '';
+		$field['autocomplete'] = isset($posted['i_autocomplete']) ? sanitize_text_field($posted['i_autocomplete']) : '';
+		$field['priority'] = isset($posted['i_priority']) ? absint($posted['i_priority']) : '';
 		//$field['custom'] = isset($posted['i_custom']) ? $posted['i_custom'] : '';
 		$field['custom'] = isset($posted['i_custom']) && $posted['i_custom'] ? 1 : 0;
-
+		
 		return $field;
 	}
 
@@ -350,7 +423,8 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 	/*********************************************/
 	public function order_data_after_order_details($order){
 		$fields = THWCFD_Utils::get_fields('additional');
-		$this->display_fields_in_admin_order($order, $fields, '<p>&nbsp;</p>');
+		//$this->display_fields_in_admin_order($order, $fields, '<p>&nbsp;</p>');
+		$this->display_fields_in_admin_order($order, $fields, '');
 	}
 
 	public function order_data_after_billing_address($order){
@@ -369,18 +443,18 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 			$order_id = THWCFD_Utils::get_order_id($order);
 		
 			foreach($fields as $name => $field){
-				if(THWCFD_Utils::is_active_custom_field($field) && isset($field['show_in_order']) && $field['show_in_order']){
+				if(THWCFD_Utils::is_active_custom_field($field) && isset($field['show_in_order']) && $field['show_in_order']  && !THWCFD_Utils::is_wc_handle_custom_field($field)){
 					$value = get_post_meta( $order_id, $name, true );
 					if(!empty($value)){
 						$value = THWCFD_Utils::get_option_text($field, $value);
-						$label = isset($field['label']) && $field['label'] ? THWCFD_Utils::t($field['label']) : $name;
+						$label = isset($field['label']) && $field['label'] ? esc_html($field['label'], 'woo-checkout-field-editor-pro') : $name;
 						$html .= '<p><strong>'. $label .':</strong><br/> '. wptexturize($value) .'</p>';
 					}
 				}
 			}
 
 			if($html){
-				echo $prefix_html.$html;	
+				echo '<div style="clear:both; padding:5px 0 0;">'.$prefix_html.$html.'</div>';
 			}
 		}
 	}
@@ -388,14 +462,14 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 	/******* TABS & SECTIONS *******/
 	/*******************************/
 	public function get_current_tab(){
-		return isset( $_GET['tab'] ) ? esc_attr( $_GET['tab'] ) : 'fields';
+		return isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'fields';
 	}
 	
 	public function get_current_section(){
 		$tab = $this->get_current_tab();
 		$section = '';
 		if($tab === 'fields'){
-			$section = isset( $_GET['section'] ) ? esc_attr( $_GET['section'] ) : 'billing';
+			$section = isset( $_GET['section'] ) ? sanitize_key( $_GET['section'] ) : 'billing';
 		}
 		return $section;
 	}
@@ -410,17 +484,14 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 		echo '<h2 class="thpladmin-tabs nav-tab-wrapper woo-nav-tab-wrapper">';
 		foreach( $this->tabs as $id => $label ){
 			$active = ( $current_tab == $id ) ? 'nav-tab-active' : '';
-			$label  = __($label, 'woo-checkout-field-editor-pro');
-			echo '<a class="nav-tab '.$active.'" href="'. $this->get_admin_url($id) .'">'.$label.'</a>';
+			//$label  = __($label, 'woo-checkout-field-editor-pro');
+			echo '<a class="nav-tab '.$active.'" href="'. esc_url($this->get_admin_url($id)) .'">'.$label.'</a>';
 		}
 		echo '</h2>';	
 	}
 	
 	public function output_sections() {
 		$result = false;
-
-		if(isset($_POST['reset_fields']))
-			$result = $this->reset_to_default();	
 
 		$current_tab = $this->get_current_tab();
 		$current_section = $this->get_current_section();
@@ -433,9 +504,9 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 		
 		echo '<ul class="thpladmin-sections">';
 		foreach( $this->sections as $id => $label ){
-			$label = __($label, 'woo-checkout-field-editor-pro');
+			// $label = __($label, 'woo-checkout-field-editor-pro');
 			$url = $this->get_admin_url($current_tab, sanitize_title($id));	
-			echo '<li><a href="'. $url .'" class="'. ( $current_section == $id ? 'current' : '' ) .'">'. $label .'</a> '. (end( $array_keys ) == $id ? '' : '|') .' </li>';
+			echo '<li><a href="'.esc_url($url) .'" class="'. ( $current_section == $id ? 'current' : '' ) .'">'. $label .'</a> '. (end( $array_keys ) == $id ? '' : '|') .' </li>';
 		}		
 		echo '</ul>';
 
@@ -453,6 +524,34 @@ class THWCFD_Admin_Settings_General extends THWCFD_Admin_Settings{
 			$url .= '&section='. $section;
 		}
 		return admin_url($url);
+	}
+
+	private function add_wpml_support($field){
+		$context = 'woo-checkout-field-editor-pro';
+		
+		$label = isset($field['label']) ? $field['label'] : '';
+		if($label){
+			$name = 'Field label - ' . $label;
+			do_action( 'wpml_register_single_string', 'woo-checkout-field-editor-pro', $name, $label );
+		}
+
+		$placeholder = isset($field['placeholder']) ? $field['placeholder'] : '';
+		if($placeholder){
+			$name = 'Field placeholder - ' . $placeholder;
+			do_action( 'wpml_register_single_string', 'woo-checkout-field-editor-pro', $name, $placeholder );
+		}
+
+		$options = isset($field['options']) ? $field['options'] : '';
+		if($options){
+			if(is_array($options)){
+				$index = 0;
+				foreach($options as $option_value => $option_text){
+					$name = 'Field option text - ' . $option_text;
+					do_action( 'wpml_register_single_string', 'woo-checkout-field-editor-pro', $name, $option_text );
+					$index++;
+				}
+			}
+		}
 	}
 }
 

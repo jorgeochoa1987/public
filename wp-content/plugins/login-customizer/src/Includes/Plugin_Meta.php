@@ -18,6 +18,7 @@ use LoginCustomizer\Includes\Disband;
  * Plugin Meta class.
  *
  * @since  2.2.0
+ * @version 2.1.5
  * @access public
  */
 class Plugin_Meta {
@@ -35,12 +36,13 @@ class Plugin_Meta {
 	/**
     * Hook into actions and filters
     * @since  2.2.0
+ 	* @version 2.1.5
 	*/
 	function hooks( ) {
 
-		include_once( LOGINCUST_DIR_PATH . 'Includes/Ajax.php' );
+		// include_once( LOGINCUST_DIR_PATH . 'Includes/Ajax.php' );
 
-		add_action( 'admin_footer',           array( $this, 'disband_model' ) );
+		// add_action( 'admin_footer',           array( $this, 'disband_model' ) );
 		add_filter( 'plugin_row_meta',        array( $this, '_row_meta'), 10, 2 );
 		add_action( 'plugin_action_links', 	  array( $this, 'login_customizer_action_links' ), 10, 2 );
 
